@@ -1,0 +1,30 @@
+{
+  "scripts": {
+    "old": "web-dev-server --open / --node-resolve --watch",
+    "dev": "esbuild app.js --bundle --outfile=index.js --loader:.js=jsx --watch",
+    "build": "npx esbuild --bundle src/index.js --outfile=dist/enhance.js --format=cjs"
+  },
+  "devDependencies": {
+    "@web/dev-server": "^0.0.25",
+    "esbuild": "^0.15.16"
+  },
+  "name": "@robotist/website",
+  "description": "Robotist website",
+  "version": "0.0.1",
+  "main": "dist/robotist.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moeamaya/robotist.git"
+  },
+  "keywords": [],
+  "author": "Moe Amaya",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/moeamaya/robotist/issues"
+  },
+  "homepage": "https://github.com/moeamaya/robotist#readme",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
