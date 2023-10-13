@@ -25,7 +25,6 @@ export function LineCountProvider({ children }) {
   const getLineCount = (text, containerWidth) => {
     const textNode = generateDOMText(text, containerWidth);
     const lines = extractLinesFromTextNode(textNode);
-    console.log(lines);
     return lines.length;
   }
 

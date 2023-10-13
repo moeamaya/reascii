@@ -22964,7 +22964,6 @@
     const getLineCount = (text, containerWidth) => {
       const textNode = generateDOMText(text, containerWidth);
       const lines = extractLinesFromTextNode(textNode);
-      console.log(lines);
       return lines.length;
     };
     return /* @__PURE__ */ import_react.default.createElement(LineCountContext.Provider, { value: { updateLineCount, getMaxLineCount, getLineCount } }, children);
@@ -22973,7 +22972,9 @@
   // components/Column.js
   var Column = ({ id, cols, width, children, fillChar, characterWidth }) => {
     const [fill, setFill] = (0, import_react2.useState)("");
-    const { getLineCount, updateLineCount } = useLineCount();
+    const [count, setCount] = (0, import_react2.useState)(0);
+    const { getLineCount, updateLineCount, getMaxLineCount } = useLineCount();
+    const linesToRender = getMaxLineCount();
     (0, import_react2.useEffect)(() => {
       if (width && fillChar) {
         const contentString = (Array.isArray(children) ? children : [children]).map(
@@ -22990,10 +22991,10 @@
       if (!width)
         return;
       const lineCount = getLineCount(children, width * (cols / 12) * characterWidth);
-      console.log(lineCount);
+      setCount(lineCount);
       updateLineCount(id, lineCount);
     }, [id, children, width]);
-    return /* @__PURE__ */ import_react2.default.createElement("div", { style: { display: "inline-block", maxWidth: `${Math.round(width * (cols / 12) * characterWidth)}px`, outline: "1px solid #bbaaaa" } }, children, fill && /* @__PURE__ */ import_react2.default.createElement("span", null, fill));
+    return /* @__PURE__ */ import_react2.default.createElement("div", { style: { display: "inline-block", maxWidth: `${Math.round(width * (cols / 12) * characterWidth)}px`, outline: "1px solid #bbaaaa" } }, children, fill && /* @__PURE__ */ import_react2.default.createElement("span", null, fill), linesToRender !== -Infinity && Array.from({ length: linesToRender - count }).map((_, index) => /* @__PURE__ */ import_react2.default.createElement("div", { key: index }, fillChar.repeat(width * (cols / 12)))));
   };
   var Column_default = Column;
 
