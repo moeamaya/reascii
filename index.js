@@ -714,7 +714,7 @@
             }
             return children;
           }
-          function createContext(defaultValue) {
+          function createContext2(defaultValue) {
             var context = {
               $$typeof: REACT_CONTEXT_TYPE,
               _currentValue: defaultValue,
@@ -986,7 +986,7 @@
             }
             return dispatcher;
           }
-          function useContext(Context) {
+          function useContext2(Context) {
             var dispatcher = resolveDispatcher();
             {
               if (Context._context !== void 0) {
@@ -1000,7 +1000,7 @@
             }
             return dispatcher.useContext(Context);
           }
-          function useState(initialState) {
+          function useState4(initialState) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useState(initialState);
           }
@@ -1008,11 +1008,11 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useReducer(reducer, initialArg, init);
           }
-          function useRef(initialValue) {
+          function useRef2(initialValue) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useRef(initialValue);
           }
-          function useEffect(create, deps) {
+          function useEffect3(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useEffect(create, deps);
           }
@@ -1778,7 +1778,7 @@
           exports.Suspense = REACT_SUSPENSE_TYPE;
           exports.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ReactSharedInternals;
           exports.cloneElement = cloneElement$1;
-          exports.createContext = createContext;
+          exports.createContext = createContext2;
           exports.createElement = createElement$1;
           exports.createFactory = createFactory;
           exports.createRef = createRef;
@@ -1789,18 +1789,18 @@
           exports.startTransition = startTransition;
           exports.unstable_act = act;
           exports.useCallback = useCallback;
-          exports.useContext = useContext;
+          exports.useContext = useContext2;
           exports.useDebugValue = useDebugValue;
           exports.useDeferredValue = useDeferredValue;
-          exports.useEffect = useEffect;
+          exports.useEffect = useEffect3;
           exports.useId = useId;
           exports.useImperativeHandle = useImperativeHandle;
           exports.useInsertionEffect = useInsertionEffect;
           exports.useLayoutEffect = useLayoutEffect;
           exports.useMemo = useMemo;
           exports.useReducer = useReducer;
-          exports.useRef = useRef;
-          exports.useState = useState;
+          exports.useRef = useRef2;
+          exports.useState = useState4;
           exports.useSyncExternalStore = useSyncExternalStore;
           exports.useTransition = useTransition;
           exports.version = ReactVersion;
@@ -2296,9 +2296,9 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React2 = require_react();
+          var React6 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React2.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React6.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
@@ -3819,7 +3819,7 @@
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React2.Children.forEach(props.children, function(child) {
+                  React6.Children.forEach(props.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -11980,7 +11980,7 @@
             }
           }
           var fakeInternalInstance = {};
-          var emptyRefsObject = new React2.Component().refs;
+          var emptyRefsObject = new React6.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -22896,13 +22896,159 @@
     }
   });
 
-  // app.js
-  var import_react = __toESM(require_react());
+  // root.js
+  var import_react5 = __toESM(require_react());
   var import_client = __toESM(require_client());
-  var Greet = () => /* @__PURE__ */ import_react.default.createElement("h1", null, "Hello, world!");
+
+  // components/App.js
+  var import_react4 = __toESM(require_react());
+
+  // components/Reascii.js
+  var import_react3 = __toESM(require_react());
+
+  // components/Column.js
+  var import_react2 = __toESM(require_react());
+
+  // components/useLineCount.js
+  var import_react = __toESM(require_react());
+
+  // util/countLines.ts
+  var collapseWhiteSpace = (value) => {
+    return value.trim().replace(/\s+/g, " ");
+  };
+  var generateDOMText = (text, width) => {
+    const textNode = document.createTextNode(text);
+    const div = document.createElement("div");
+    div.style.position = "absolute";
+    div.style.top = "500px";
+    div.style.width = width + "px";
+    div.appendChild(textNode);
+    document.body.appendChild(div);
+    return textNode;
+  };
+  var extractLinesFromTextNode = (textNode) => {
+    textNode.textContent = collapseWhiteSpace(textNode.textContent);
+    const textContent = textNode.textContent;
+    const range = document.createRange();
+    const lines = [];
+    let lineCharacters = [];
+    for (var i = 0; i < textContent.length; i++) {
+      range.setStart(textNode, 0);
+      range.setEnd(textNode, i + 1);
+      const lineIndex = range.getClientRects().length - 1;
+      if (!lines[lineIndex]) {
+        lines.push(lineCharacters = []);
+      }
+      lineCharacters.push(textContent.charAt(i));
+    }
+    return lines.map((characters) => collapseWhiteSpace(characters.join("")));
+  };
+
+  // components/useLineCount.js
+  var LineCountContext = (0, import_react.createContext)();
+  function useLineCount() {
+    return (0, import_react.useContext)(LineCountContext);
+  }
+  function LineCountProvider({ children }) {
+    const [columnLineCounts, setColumnLineCounts] = (0, import_react.useState)({});
+    const updateLineCount = (columnId, lineCount) => {
+      setColumnLineCounts((prevCounts) => ({
+        ...prevCounts,
+        [columnId]: lineCount
+      }));
+    };
+    const getMaxLineCount = () => {
+      const lineCounts = Object.values(columnLineCounts);
+      return Math.max(...lineCounts);
+    };
+    const getLineCount = (text, containerWidth) => {
+      const textNode = generateDOMText(text, containerWidth);
+      const lines = extractLinesFromTextNode(textNode);
+      console.log(lines);
+      return lines.length;
+    };
+    return /* @__PURE__ */ import_react.default.createElement(LineCountContext.Provider, { value: { updateLineCount, getMaxLineCount, getLineCount } }, children);
+  }
+
+  // components/Column.js
+  var Column = ({ id, cols, width, children, fillChar, characterWidth }) => {
+    const [fill, setFill] = (0, import_react2.useState)("");
+    const { getLineCount, updateLineCount } = useLineCount();
+    (0, import_react2.useEffect)(() => {
+      if (width && fillChar) {
+        const contentString = (Array.isArray(children) ? children : [children]).map(
+          (child) => typeof child === "string" ? child : child.props ? child.props.children : ""
+        ).join("");
+        const contentLength = contentString.length;
+        const missingChars = width * (cols / 12) - contentLength;
+        if (missingChars > 0) {
+          setFill(fillChar.repeat(missingChars));
+        }
+      }
+    }, [width, fillChar, children]);
+    (0, import_react2.useEffect)(() => {
+      if (!width)
+        return;
+      const lineCount = getLineCount(children, width * (cols / 12) * characterWidth);
+      console.log(lineCount);
+      updateLineCount(id, lineCount);
+    }, [id, children, width]);
+    return /* @__PURE__ */ import_react2.default.createElement("div", { style: { display: "inline-block", maxWidth: `${Math.round(width * (cols / 12) * characterWidth)}px`, outline: "1px solid #bbaaaa" } }, children, fill && /* @__PURE__ */ import_react2.default.createElement("span", null, fill));
+  };
+  var Column_default = Column;
+
+  // components/Reascii.js
+  var calculateCharacterWidth = (char, textColor, bgColor) => {
+    const span = document.createElement("span");
+    span.style.visibility = "hidden";
+    span.style.color = textColor;
+    span.style.backgroundColor = bgColor;
+    span.innerText = char;
+    document.body.appendChild(span);
+    const width = span.offsetWidth;
+    document.body.removeChild(span);
+    return width;
+  };
+  var Reascii = ({ border, padding, color, background, fill, columns }) => {
+    const parentContainerRef = (0, import_react3.useRef)();
+    const [borderWidth, setBorderWidth] = (0, import_react3.useState)(0);
+    const [characterWidth, setCharacterWidth] = (0, import_react3.useState)(0);
+    const borderStyle = {
+      top: border.top || ":",
+      bottom: border.bottom || ":"
+    };
+    const paddingValue = padding || 0;
+    const textColor = color || "var(--color-brand)";
+    const bgColor = background || "var(--color-contrast)";
+    const fillChar = fill || ".";
+    (0, import_react3.useEffect)(() => {
+      if (parentContainerRef.current) {
+        const parentElement = parentContainerRef.current.parentNode;
+        if (parentElement) {
+          const parentWidth = parentElement.clientWidth;
+          const charWidth = calculateCharacterWidth(fillChar, textColor, bgColor);
+          setCharacterWidth(charWidth);
+          const calculatedBorderWidth = Math.floor(parentWidth / charWidth);
+          setBorderWidth(calculatedBorderWidth);
+        }
+      }
+    }, []);
+    return /* @__PURE__ */ import_react3.default.createElement(LineCountProvider, null, /* @__PURE__ */ import_react3.default.createElement("div", { ref: parentContainerRef, style: { color: textColor, backgroundColor: bgColor, outline: `1px solid #eee` } }, /* @__PURE__ */ import_react3.default.createElement("div", { "data-ascii": borderStyle.top.repeat(borderWidth) }, borderStyle.top.repeat(borderWidth)), /* @__PURE__ */ import_react3.default.createElement(Column_default, { id: "1", fillChar: ".", cols: 3, width: borderWidth, characterWidth }, "ROBOTIST"), /* @__PURE__ */ import_react3.default.createElement(Column_default, { id: "5", fillChar: ".", cols: 2, width: borderWidth, characterWidth }, "Testing this one with way more text than you should ever have"), borderStyle.bottom.repeat(borderWidth)));
+  };
+  var Reascii_default = Reascii;
+
+  // components/App.js
+  var App = () => {
+    return /* @__PURE__ */ import_react4.default.createElement("div", null, /* @__PURE__ */ import_react4.default.createElement(Reascii_default, { border: { top: ":", bottom: ":" } }));
+  };
+  {
+  }
+  var App_default = App;
+
+  // root.js
   var container = document.getElementById("root");
   var root = import_client.default.createRoot(container);
-  root.render(/* @__PURE__ */ import_react.default.createElement(Greet, null));
+  root.render(/* @__PURE__ */ import_react5.default.createElement(App_default, null));
 })();
 /**
  * @license React

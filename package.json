@@ -1,8 +1,7 @@
 {
   "scripts": {
     "old": "web-dev-server --open / --node-resolve --watch",
-    "dev": "esbuild app.js --bundle --outfile=index.js --loader:.js=jsx --watch",
-    "build": "npx esbuild --bundle src/index.js --outfile=dist/enhance.js --format=cjs"
+    "dev": "esbuild root.js --bundle --outfile=index.js --loader:.js=jsx --watch"
   },
   "devDependencies": {
     "@web/dev-server": "^0.0.25",
