@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLineCount } from './useLineCount';
 
-const Column = ({ id, cols, width, children, fillChar, characterWidth }) => {
+const Column = ({ id, cols, width, children, fillChar, characterWidth, color, align = 'left', childColor = 'inherit' }) => {
   const [fill, setFill] = useState('');
   const [count, setCount] = useState(0);
   const { getLineCount, updateLineCount, getMaxLineCount } = useLineCount();
@@ -31,9 +31,10 @@ const Column = ({ id, cols, width, children, fillChar, characterWidth }) => {
   }, [id, children, width]);
 
   return (
-    <div style={{display: "inline-block", maxWidth: `${Math.round(width * (cols/12) * characterWidth)}px`, outline: "1px solid #bbaaaa"}}>
-      {children}
-      {fill && <span>{fill}</span>}
+    <div style={{display: "inline-block", width: `${(width * (cols/12) * characterWidth)}px`, outline: "1px solid transparent"}}>
+      {fill && align === 'right' && <span>{fill}</span>}
+      <span style={{color}}>{children}</span>
+      {fill && align === 'left' && <span>{fill}</span>}
       {/* Render additional fill lines if necessary */}
       {linesToRender !== -Infinity && Array.from({ length: linesToRender - count }).map((_, index) => (
         <div key={index}>

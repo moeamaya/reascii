@@ -14,11 +14,9 @@ const collapseWhiteSpace = (value) => {
 export const generateDOMText = (text: string, width: number): Text => {
   const textNode = document.createTextNode(text);
   const div = document.createElement("div");
-  div.style.position = "absolute";
-  div.style.top = "500px";
-  // div.style.top = "-9999px";
-  // div.style.left = "-9999px";
-  // div.style.visibility = "hidden";
+  div.style.top = "-9999px";
+  div.style.left = "-9999px";
+  div.style.visibility = "hidden";
   div.style.width = width + "px";
   div.appendChild(textNode);
   document.body.appendChild(div);

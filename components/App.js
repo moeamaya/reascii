@@ -3,21 +3,20 @@ import Reascii from './Reascii'
 
 const App = () => {
   return (
+    <>
     <div>
-      <Reascii border={{top: ":", bottom: ":"}} />
+      <Reascii border={{top: " ▚", bottom: "▎"}} />
     </div>
+
+     
+    <div style={{marginTop: "2rem"}}>
+      <div>Title...................<a href="#" style={{color: "var(--color-brand)"}}>Menu</a>....................Longer text that stretch.........{"{╍}"}</div>
+      <div>................................................es over 3 very nice and ............</div>
+      <div>................................................clean lines, but also wh............</div>
+      <div>................................................at if it's crazy long...............</div>
+    </div>
+    </>
   );
 }
-
-{/* <div ref={parentContainerRef} style={{ color: textColor, backgroundColor: bgColor, outline: `1px solid #eee` }}>
-  <div data-ascii={borderStyle.top.repeat(borderWidth)}>{borderStyle.top.repeat(borderWidth)}</div>
-  <Column fillChar="." cols={3} width={borderWidth} characterWidth={characterWidth}>.</Column>
-  <Column fillChar="." cols={2} width={borderWidth} characterWidth={characterWidth}>○ NIGHT</Column>
-  <Column fillChar="." cols={2} width={borderWidth} characterWidth={characterWidth}>○ ALL CATEGORIES</Column>
-  <Column fillChar="." cols={2} width={borderWidth} characterWidth={characterWidth}>.</Column>
-  <Column fillChar="." cols={2} width={borderWidth} characterWidth={characterWidth}>↗SUMBIT↗</Column>
-  <Column fillChar="." cols={1} width={borderWidth} characterWidth={characterWidth}>.</Column>
-  {borderStyle.bottom.repeat(borderWidth)}
-</div> */}
 
 export default App;

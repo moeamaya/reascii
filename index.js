@@ -891,7 +891,7 @@
             }
             return lazyType;
           }
-          function forwardRef(render) {
+          function forwardRef2(render) {
             {
               if (render != null && render.$$typeof === REACT_MEMO_TYPE) {
                 error("forwardRef requires a render function but received a `memo` component. Instead of forwardRef(memo(...)), use memo(forwardRef(...)).");
@@ -1782,7 +1782,7 @@
           exports.createElement = createElement$1;
           exports.createFactory = createFactory;
           exports.createRef = createRef;
-          exports.forwardRef = forwardRef;
+          exports.forwardRef = forwardRef2;
           exports.isValidElement = isValidElement;
           exports.lazy = lazy;
           exports.memo = memo;
@@ -2296,9 +2296,9 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React6 = require_react();
+          var React7 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React6.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React7.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
@@ -3819,7 +3819,7 @@
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React6.Children.forEach(props.children, function(child) {
+                  React7.Children.forEach(props.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -11980,7 +11980,7 @@
             }
           }
           var fakeInternalInstance = {};
-          var emptyRefsObject = new React6.Component().refs;
+          var emptyRefsObject = new React7.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -22897,14 +22897,14 @@
   });
 
   // root.js
-  var import_react5 = __toESM(require_react());
+  var import_react6 = __toESM(require_react());
   var import_client = __toESM(require_client());
 
   // components/App.js
-  var import_react4 = __toESM(require_react());
+  var import_react5 = __toESM(require_react());
 
   // components/Reascii.js
-  var import_react3 = __toESM(require_react());
+  var import_react4 = __toESM(require_react());
 
   // components/Column.js
   var import_react2 = __toESM(require_react());
@@ -22919,8 +22919,9 @@
   var generateDOMText = (text, width) => {
     const textNode = document.createTextNode(text);
     const div = document.createElement("div");
-    div.style.position = "absolute";
-    div.style.top = "500px";
+    div.style.top = "-9999px";
+    div.style.left = "-9999px";
+    div.style.visibility = "hidden";
     div.style.width = width + "px";
     div.appendChild(textNode);
     document.body.appendChild(div);
@@ -22970,7 +22971,7 @@
   }
 
   // components/Column.js
-  var Column = ({ id, cols, width, children, fillChar, characterWidth }) => {
+  var Column = ({ id, cols, width, children, fillChar, characterWidth, color, align = "left", childColor = "inherit" }) => {
     const [fill, setFill] = (0, import_react2.useState)("");
     const [count, setCount] = (0, import_react2.useState)(0);
     const { getLineCount, updateLineCount, getMaxLineCount } = useLineCount();
@@ -22994,26 +22995,42 @@
       setCount(lineCount);
       updateLineCount(id, lineCount);
     }, [id, children, width]);
-    return /* @__PURE__ */ import_react2.default.createElement("div", { style: { display: "inline-block", maxWidth: `${Math.round(width * (cols / 12) * characterWidth)}px`, outline: "1px solid #bbaaaa" } }, children, fill && /* @__PURE__ */ import_react2.default.createElement("span", null, fill), linesToRender !== -Infinity && Array.from({ length: linesToRender - count }).map((_, index) => /* @__PURE__ */ import_react2.default.createElement("div", { key: index }, fillChar.repeat(width * (cols / 12)))));
+    return /* @__PURE__ */ import_react2.default.createElement("div", { style: { display: "inline-block", width: `${width * (cols / 12) * characterWidth}px`, outline: "1px solid transparent" } }, fill && align === "right" && /* @__PURE__ */ import_react2.default.createElement("span", null, fill), /* @__PURE__ */ import_react2.default.createElement("span", { style: { color } }, children), fill && align === "left" && /* @__PURE__ */ import_react2.default.createElement("span", null, fill), linesToRender !== -Infinity && Array.from({ length: linesToRender - count }).map((_, index) => /* @__PURE__ */ import_react2.default.createElement("div", { key: index }, fillChar.repeat(width * (cols / 12)))));
   };
   var Column_default = Column;
 
+  // components/GridCount.js
+  var import_react3 = __toESM(require_react());
+  var GridCount = (0, import_react3.forwardRef)((prop, ref) => {
+    const color = prop.color;
+    const canvasWidth = prop.canvasWidth;
+    const characterWidth = prop.characterWidth;
+    console.log("canvasWidth", canvasWidth);
+    return /* @__PURE__ */ import_react3.default.createElement(LineCountProvider, null, /* @__PURE__ */ import_react3.default.createElement("div", { ref, style: { color: "#555" } }, /* @__PURE__ */ import_react3.default.createElement("div", null, "COLUMNS", "-".repeat(Math.max(canvasWidth - 7, 0))), /* @__PURE__ */ import_react3.default.createElement(Column_default, { id: "1", fillChar: ".", cols: 1, width: canvasWidth, characterWidth, color: "#777" }, "\u258F1"), /* @__PURE__ */ import_react3.default.createElement(Column_default, { id: "2", fillChar: ".", cols: 1, width: canvasWidth, characterWidth, color: "#777" }, "\u258F2"), /* @__PURE__ */ import_react3.default.createElement(Column_default, { id: "3", fillChar: ".", cols: 1, width: canvasWidth, characterWidth, color: "#777" }, "\u258F3"), /* @__PURE__ */ import_react3.default.createElement(Column_default, { id: "4", fillChar: ".", cols: 1, width: canvasWidth, characterWidth, color: "#777" }, "\u258F4"), /* @__PURE__ */ import_react3.default.createElement(Column_default, { id: "5", fillChar: ".", cols: 1, width: canvasWidth, characterWidth, color: "#777" }, "\u258F5"), /* @__PURE__ */ import_react3.default.createElement(Column_default, { id: "6", fillChar: ".", cols: 1, width: canvasWidth, characterWidth, color: "#777" }, "\u258F6"), /* @__PURE__ */ import_react3.default.createElement(Column_default, { id: "7", fillChar: ".", cols: 1, width: canvasWidth, characterWidth, color: "#777" }, "\u258F7"), /* @__PURE__ */ import_react3.default.createElement(Column_default, { id: "8", fillChar: ".", cols: 1, width: canvasWidth, characterWidth, color: "#777" }, "\u258F8"), /* @__PURE__ */ import_react3.default.createElement(Column_default, { id: "9", fillChar: ".", cols: 1, width: canvasWidth, characterWidth, color: "#777" }, "\u258F9"), /* @__PURE__ */ import_react3.default.createElement(Column_default, { id: "10", fillChar: ".", cols: 1, width: canvasWidth, characterWidth, color: "#777" }, "\u258F10"), /* @__PURE__ */ import_react3.default.createElement(Column_default, { id: "11", fillChar: ".", cols: 1, width: canvasWidth, characterWidth, color: "#777" }, "\u258F11"), /* @__PURE__ */ import_react3.default.createElement(Column_default, { id: "12", fillChar: ".", cols: 1, width: canvasWidth, characterWidth, color: "#777" }, "\u258F12"), /* @__PURE__ */ import_react3.default.createElement("div", { style: { color: "#555" } }, ".".repeat(canvasWidth)), /* @__PURE__ */ import_react3.default.createElement("div", { style: { color: "#555" } }, ".".repeat(canvasWidth))));
+  });
+  var GridCount_default = GridCount;
+
   // components/Reascii.js
-  var calculateCharacterWidth = (char, textColor, bgColor) => {
+  var calculateCharacterWidth = (char) => {
     const span = document.createElement("span");
     span.style.visibility = "hidden";
-    span.style.color = textColor;
-    span.style.backgroundColor = bgColor;
-    span.innerText = char;
+    span.innerText = char.repeat(25);
     document.body.appendChild(span);
-    const width = span.offsetWidth;
+    const width = span.offsetWidth / 25;
     document.body.removeChild(span);
+    console.log("width", width);
     return width;
   };
-  var Reascii = ({ border, padding, color, background, fill, columns }) => {
-    const parentContainerRef = (0, import_react3.useRef)();
-    const [borderWidth, setBorderWidth] = (0, import_react3.useState)(0);
-    const [characterWidth, setCharacterWidth] = (0, import_react3.useState)(0);
+  var Reascii = ({ border, padding, color, background, fill }) => {
+    const parentContainerRef = (0, import_react4.useRef)();
+    const [borderWidth, setBorderWidth] = (0, import_react4.useState)(0);
+    const [characterWidth, setCharacterWidth] = (0, import_react4.useState)(0);
+    const maxColumnWidth = borderWidth / 12;
+    const canvasWidth = maxColumnWidth * 12;
+    console.log("borderWidth", borderWidth);
+    console.log("characterWidth", characterWidth);
+    console.log("maxColumnWidth", maxColumnWidth);
+    console.log("canvasWidth", canvasWidth);
     const borderStyle = {
       top: border.top || ":",
       bottom: border.bottom || ":"
@@ -23022,7 +23039,7 @@
     const textColor = color || "var(--color-brand)";
     const bgColor = background || "var(--color-contrast)";
     const fillChar = fill || ".";
-    (0, import_react3.useEffect)(() => {
+    (0, import_react4.useEffect)(() => {
       if (parentContainerRef.current) {
         const parentElement = parentContainerRef.current.parentNode;
         if (parentElement) {
@@ -23034,22 +23051,20 @@
         }
       }
     }, []);
-    return /* @__PURE__ */ import_react3.default.createElement(LineCountProvider, null, /* @__PURE__ */ import_react3.default.createElement("div", { ref: parentContainerRef, style: { color: textColor, backgroundColor: bgColor, outline: `1px solid #eee` } }, /* @__PURE__ */ import_react3.default.createElement("div", { "data-ascii": borderStyle.top.repeat(borderWidth) }, borderStyle.top.repeat(borderWidth)), /* @__PURE__ */ import_react3.default.createElement(Column_default, { id: "1", fillChar: ".", cols: 3, width: borderWidth, characterWidth }, "ROBOTIST"), /* @__PURE__ */ import_react3.default.createElement(Column_default, { id: "5", fillChar: ".", cols: 2, width: borderWidth, characterWidth }, "Testing this one with way more text than you should ever have"), borderStyle.bottom.repeat(borderWidth)));
+    return /* @__PURE__ */ import_react4.default.createElement(import_react4.default.Fragment, null, /* @__PURE__ */ import_react4.default.createElement(GridCount_default, { color: bgColor, canvasWidth, characterWidth }), /* @__PURE__ */ import_react4.default.createElement(LineCountProvider, null, /* @__PURE__ */ import_react4.default.createElement("div", { ref: parentContainerRef, style: { backgroundColor: bgColor, outline: `1px solid transparent` } }, /* @__PURE__ */ import_react4.default.createElement("div", { "data-ascii": borderStyle.top.repeat(canvasWidth) }, borderStyle.top.repeat(canvasWidth)), /* @__PURE__ */ import_react4.default.createElement("div", null, ".".repeat(canvasWidth)), /* @__PURE__ */ import_react4.default.createElement(Column_default, { id: "1", fillChar: ".", cols: 3, width: canvasWidth, characterWidth }, "REASCII"), /* @__PURE__ */ import_react4.default.createElement(Column_default, { id: "2", fillChar: ".", cols: 2, width: canvasWidth, characterWidth, color: textColor }, "\u25CB DAY"), /* @__PURE__ */ import_react4.default.createElement(Column_default, { id: "3", fillChar: ".", cols: 2, width: canvasWidth, characterWidth, color: textColor }, "\u25CB FEATURED APIS"), /* @__PURE__ */ import_react4.default.createElement(Column_default, { id: "4", fillChar: ".", cols: 2, width: canvasWidth, characterWidth, color: textColor }, "\u25CB ABOUT"), /* @__PURE__ */ import_react4.default.createElement(Column_default, { id: "5", fillChar: ".", cols: 2, width: canvasWidth, characterWidth, color: textColor }, "Testing this one with way more text than you should ever have"), /* @__PURE__ */ import_react4.default.createElement(Column_default, { id: "6", fillChar: ".", cols: 1, width: canvasWidth, characterWidth, align: "right" }, "{}"))), /* @__PURE__ */ import_react4.default.createElement(LineCountProvider, null, /* @__PURE__ */ import_react4.default.createElement("div", { ref: parentContainerRef, style: { backgroundColor: bgColor, outline: `1px solid transparent` } }, /* @__PURE__ */ import_react4.default.createElement(Column_default, { id: "1", fillChar: ".", cols: 3, width: canvasWidth, characterWidth }, "."), /* @__PURE__ */ import_react4.default.createElement(Column_default, { id: "2", fillChar: ".", cols: 2, width: canvasWidth, characterWidth, color: textColor }, "\u25CF NIGHT"), /* @__PURE__ */ import_react4.default.createElement(Column_default, { id: "3", fillChar: ".", cols: 2, width: canvasWidth, characterWidth, color: textColor }, "\u25CB ALL CATEGORIES"), /* @__PURE__ */ import_react4.default.createElement(Column_default, { id: "4", fillChar: ".", cols: 2, width: canvasWidth, characterWidth, color: textColor }, "."), /* @__PURE__ */ import_react4.default.createElement(Column_default, { id: "5", fillChar: ".", cols: 2, width: canvasWidth, characterWidth }, "There were some interesting ideas here"), /* @__PURE__ */ import_react4.default.createElement(Column_default, { id: "6", fillChar: ".", cols: 1, width: canvasWidth, characterWidth }, "."), /* @__PURE__ */ import_react4.default.createElement("div", null, ".".repeat(canvasWidth)), borderStyle.bottom.repeat(canvasWidth))), /* @__PURE__ */ import_react4.default.createElement("div", { style: { color: "#444" } }, /* @__PURE__ */ import_react4.default.createElement("div", null, ".".repeat(canvasWidth)), /* @__PURE__ */ import_react4.default.createElement("div", null, ".".repeat(canvasWidth)), /* @__PURE__ */ import_react4.default.createElement("div", null, ".".repeat(canvasWidth)), /* @__PURE__ */ import_react4.default.createElement(GridCount_default, { color: bgColor, canvasWidth, characterWidth })), /* @__PURE__ */ import_react4.default.createElement(LineCountProvider, null, /* @__PURE__ */ import_react4.default.createElement("div", { ref: parentContainerRef, style: { backgroundColor: bgColor, outline: `1px solid transparent` } }, /* @__PURE__ */ import_react4.default.createElement(Column_default, { id: "1", fillChar: ".", cols: 3, width: canvasWidth, characterWidth }, "Menu"), /* @__PURE__ */ import_react4.default.createElement(Column_default, { id: "2", fillChar: ".", cols: 7, width: canvasWidth, characterWidth, color: textColor }, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed lectus vestibulum mattis ullamcorper. Rutrum quisque non tellus orci ac auctor augue mauris augue. Pretium vulputate sapien nec sagittis aliquam malesuada. Duis convallis convallis tellus id interdum velit laoreet. Laoreet non curabitur gravida arcu. Sem et tortor consequat id porta nibh venenatis cras. Diam maecenas sed enim ut sem. Ullamcorper a lacus vestibulum sed arcu non odio. Congue nisi vitae suscipit tellus mauris a. Ut morbi tincidunt augue interdum velit euismod in pellentesque massa. Luctus accumsan tortor posuere ac ut consequat semper viverra. Urna porttitor rhoncus dolor purus non enim praesent. Risus ultricies tristique nulla aliquet. Nec dui nunc mattis enim ut tellus elementum sagittis vitae. Nisi scelerisque eu ultrices vitae auctor. Ipsum consequat nisl vel pretium lectus quam. Enim neque volutpat ac tincidunt vitae semper quis. Ut sem viverra aliquet eget sit amet. Vestibulum morbi blandit cursus risus at ultrices. Tristique senectus et netus et malesuada fames. Ac turpis egestas sed tempus urna et pharetra pharetra. Massa massa ultricies mi quis. Vitae turpis massa sed elementum tempus egestas sed sed risus. Mauris augue neque gravida in fermentum et sollicitudin ac. Nisi quis eleifend quam adipiscing. Elementum sagittis vitae et leo duis ut. Vestibulum lectus mauris ultrices eros in. Malesuada fames ac turpis egestas sed tempus. Quis eleifend quam adipiscing vitae proin sagittis. Morbi tempus iaculis urna id volutpat lacus laoreet non curabitur. Enim nunc faucibus a pellentesque sit amet. Auctor augue mauris augue neque gravida. Enim tortor at auctor urna nunc id cursus. Massa sed elementum tempus egestas sed sed risus pretium. Sit amet nulla facilisi morbi tempus iaculis urna id volutpat. Id aliquet lectus proin nibh. Nunc scelerisque viverra mauris in aliquam. Sit amet consectetur adipiscing elit. Nisl suscipit adipiscing bibendum est ultricies integer. Non tellus orci ac auctor. Aliquet lectus proin nibh nisl condimentum id venenatis. Vitae tortor condimentum lacinia quis vel eros donec ac. Consectetur adipiscing elit duis tristique sollicitudin nibh sit amet commodo. Ultricies tristique nulla aliquet enim tortor at auctor urna. Vel pharetra vel turpis nunc eget lorem dolor. A diam sollicitudin tempor id eu nisl nunc mi ipsum. Porttitor massa id neque aliquam vestibulum. Eu volutpat odio facilisis mauris sit amet. Magna ac placerat vestibulum lectus mauris ultrices eros. Egestas egestas fringilla phasellus faucibus. Neque aliquam vestibulum morbi blandit cursus risus at. Est placerat in egestas erat imperdiet sed euismod nisi. Fusce id velit ut tortor pretium. Morbi tristique senectus et netus et malesuada fames. Ut placerat orci nulla pellentesque dignissim enim sit amet venenatis."), /* @__PURE__ */ import_react4.default.createElement(Column_default, { id: "3", fillChar: ".", cols: 2, width: canvasWidth, characterWidth, color: textColor }, "\u25CB ALL CATEGORIES"), borderStyle.bottom.repeat(canvasWidth))));
   };
   var Reascii_default = Reascii;
 
   // components/App.js
   var App = () => {
-    return /* @__PURE__ */ import_react4.default.createElement("div", null, /* @__PURE__ */ import_react4.default.createElement(Reascii_default, { border: { top: ":", bottom: ":" } }));
+    return /* @__PURE__ */ import_react5.default.createElement(import_react5.default.Fragment, null, /* @__PURE__ */ import_react5.default.createElement("div", null, /* @__PURE__ */ import_react5.default.createElement(Reascii_default, { border: { top: " \u259A", bottom: "\u258E" } })), /* @__PURE__ */ import_react5.default.createElement("div", { style: { marginTop: "2rem" } }, /* @__PURE__ */ import_react5.default.createElement("div", null, "Title...................", /* @__PURE__ */ import_react5.default.createElement("a", { href: "#", style: { color: "var(--color-brand)" } }, "Menu"), "....................Longer text that stretch.........", "{\u254D}"), /* @__PURE__ */ import_react5.default.createElement("div", null, "................................................es over 3 very nice and ............"), /* @__PURE__ */ import_react5.default.createElement("div", null, "................................................clean lines, but also wh............"), /* @__PURE__ */ import_react5.default.createElement("div", null, "................................................at if it's crazy long...............")));
   };
-  {
-  }
   var App_default = App;
 
   // root.js
   var container = document.getElementById("root");
   var root = import_client.default.createRoot(container);
-  root.render(/* @__PURE__ */ import_react5.default.createElement(App_default, null));
+  root.render(/* @__PURE__ */ import_react6.default.createElement(App_default, null));
 })();
 /**
  * @license React
