@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "old": "web-dev-server --open / --node-resolve --watch",
+    "web": "web-dev-server --open / --node-resolve --watch",
     "dev": "esbuild root.js --bundle --outfile=index.js --loader:.js=jsx --watch"
   },
   "devDependencies": {

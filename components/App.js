@@ -1,11 +1,14 @@
 import React from 'react'
 import Reascii from './Reascii'
+import { CanvasProvider } from './useCanvas';
 
 const App = () => {
   return (
     <>
     <div>
-      <Reascii border={{top: " ▚", bottom: "▎"}} />
+      <CanvasProvider>
+        <Reascii border={{top: " ▚", bottom: "▎"}} />
+      </CanvasProvider>
     </div>
 
      
