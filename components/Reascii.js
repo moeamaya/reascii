@@ -16,7 +16,6 @@ const calculateCharacterWidth = (char) => {
   document.body.appendChild(span);
   const width = span.offsetWidth / 25;
   document.body.removeChild(span);
-  console.log('width', width)
   return width;
 };
 
@@ -69,7 +68,7 @@ const Reascii = ({ border, padding, color, background, fill }) => {
           <Column id="6" fillChar="." cols={1} align='right'>{"{}"}</Column>
         </div>
       </LineCountProvider>
-      <LineCountProvider>
+      {/* <LineCountProvider>
         <div ref={parentContainerRef} style={{ backgroundColor: bgColor, outline: `1px solid transparent` }}>
           <Column id="1" fillChar="." cols={3}>.</Column>
           <Column id="2" fillChar="." cols={2} color={textColor}>● NIGHT</Column>
@@ -122,7 +121,7 @@ const Reascii = ({ border, padding, color, background, fill }) => {
           <Column id="3" fillChar="." cols={2} color={textColor}>○ ALL CATEGORIES</Column>
           {borderStyle.bottom.repeat(asciiWidth)}
         </div>
-      </LineCountProvider>
+      </LineCountProvider> */}
     </>
   );
 }
