@@ -1000,7 +1000,7 @@
             }
             return dispatcher.useContext(Context);
           }
-          function useState5(initialState) {
+          function useState4(initialState) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useState(initialState);
           }
@@ -1800,7 +1800,7 @@
           exports.useMemo = useMemo;
           exports.useReducer = useReducer;
           exports.useRef = useRef2;
-          exports.useState = useState5;
+          exports.useState = useState4;
           exports.useSyncExternalStore = useSyncExternalStore;
           exports.useTransition = useTransition;
           exports.version = ReactVersion;
@@ -23074,7 +23074,7 @@
 
   // components/App.js
   var App = () => {
-    return /* @__PURE__ */ import_react6.default.createElement(import_react6.default.Fragment, null, /* @__PURE__ */ import_react6.default.createElement("div", null, /* @__PURE__ */ import_react6.default.createElement(CanvasProvider, null, /* @__PURE__ */ import_react6.default.createElement(Reascii_default, { border: { top: " \u259A", bottom: "\u258E" } }))), /* @__PURE__ */ import_react6.default.createElement("div", { style: { display: "none", marginTop: "2rem" } }, /* @__PURE__ */ import_react6.default.createElement("div", null, "Title...................", /* @__PURE__ */ import_react6.default.createElement("a", { href: "#", style: { color: "var(--color-brand)" } }, "Menu"), "....................Longer text that stretch.........", "{\u254D}"), /* @__PURE__ */ import_react6.default.createElement("div", null, "................................................es over 3 very nice and ............"), /* @__PURE__ */ import_react6.default.createElement("div", null, "................................................clean lines, but also wh............"), /* @__PURE__ */ import_react6.default.createElement("div", null, "................................................at if it's crazy long...............")));
+    return /* @__PURE__ */ import_react6.default.createElement("div", null, /* @__PURE__ */ import_react6.default.createElement(CanvasProvider, null, /* @__PURE__ */ import_react6.default.createElement(Reascii_default, { border: { top: " \u259A", bottom: "\u258E" } })));
   };
   var App_default = App;
 
