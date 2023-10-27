@@ -2296,9 +2296,9 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React8 = require_react();
+          var React9 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React8.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React9.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
@@ -3819,7 +3819,7 @@
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React8.Children.forEach(props.children, function(child) {
+                  React9.Children.forEach(props.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -11980,7 +11980,7 @@
             }
           }
           var fakeInternalInstance = {};
-          var emptyRefsObject = new React8.Component().refs;
+          var emptyRefsObject = new React9.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -22897,14 +22897,14 @@
   });
 
   // root.js
-  var import_react7 = __toESM(require_react());
+  var import_react8 = __toESM(require_react());
   var import_client = __toESM(require_client());
 
   // components/App.js
-  var import_react6 = __toESM(require_react());
+  var import_react7 = __toESM(require_react());
 
   // components/Reascii.js
-  var import_react2 = __toESM(require_react());
+  var import_react6 = __toESM(require_react());
 
   // components/useCanvas.js
   var import_react = __toESM(require_react());
@@ -22924,7 +22924,8 @@
     return /* @__PURE__ */ import_react.default.createElement(CanvasContext.Provider, { value: { canvas, updateCanvas } }, children);
   }
 
-  // components/Reascii.js
+  // components/Canvas.js
+  var import_react2 = __toESM(require_react());
   var calculateCharacterWidth = (char) => {
     const span = document.createElement("span");
     span.style.visibility = "hidden";
@@ -22934,10 +22935,9 @@
     document.body.removeChild(span);
     return width;
   };
-  var Reascii = ({ background, fill, children }) => {
+  var Canvas = ({ fill, children }) => {
     const parentContainerRef = (0, import_react2.useRef)();
     const { updateCanvas } = useCanvas();
-    const bgColor = background || "var(--color-contrast)";
     const fillChar = fill || ".";
     (0, import_react2.useEffect)(() => {
       if (parentContainerRef.current) {
@@ -22947,22 +22947,16 @@
           const characterWidth = calculateCharacterWidth(fillChar);
           const asciiWidth = Math.floor(canvasWidth / characterWidth);
           updateCanvas({
-            canvasWidth,
             asciiWidth,
+            canvasWidth,
             characterWidth
           });
         }
       }
     }, []);
-    return /* @__PURE__ */ import_react2.default.createElement("div", { ref: parentContainerRef, style: { backgroundColor: bgColor, outline: `1px solid transparent` } }, children);
+    return /* @__PURE__ */ import_react2.default.createElement("div", { ref: parentContainerRef, style: { outline: `1px solid transparent` } }, children);
   };
-  var Reascii_default = Reascii;
-
-  // components/GridCount.js
-  var import_react5 = __toESM(require_react());
-
-  // components/Col.js
-  var import_react4 = __toESM(require_react());
+  var Canvas_default = Canvas;
 
   // components/useRow.js
   var import_react3 = __toESM(require_react());
@@ -23026,6 +23020,7 @@
   }
 
   // components/Col.js
+  var import_react4 = __toESM(require_react());
   var Col = ({ id, cols, children, fillChar, color, align = "left", childColor = "inherit" }) => {
     const [fill, setFill] = (0, import_react4.useState)("");
     const [count, setCount] = (0, import_react4.useState)(0);
@@ -23059,6 +23054,7 @@
   var Col_default = Col;
 
   // components/GridCount.js
+  var import_react5 = __toESM(require_react());
   var GridCount = (0, import_react5.forwardRef)((prop, ref) => {
     const { canvas } = useCanvas();
     const { asciiWidth } = canvas;
@@ -23067,16 +23063,23 @@
   });
   var GridCount_default = GridCount;
 
+  // components/Reascii.js
+  var Reascii = ({ fill, children }) => {
+    const fillChar = fill || ".";
+    return /* @__PURE__ */ import_react6.default.createElement(CanvasProvider, null, /* @__PURE__ */ import_react6.default.createElement(Canvas_default, { fill: fillChar }, children));
+  };
+  var Reascii_default = Reascii;
+
   // components/App.js
   var App = () => {
-    return /* @__PURE__ */ import_react6.default.createElement("div", null, /* @__PURE__ */ import_react6.default.createElement(CanvasProvider, null, /* @__PURE__ */ import_react6.default.createElement(Reascii_default, { border: { top: " \u259A", bottom: "\u258E" } }, /* @__PURE__ */ import_react6.default.createElement(GridCount_default, { color: "var(--color-contrast)" }), /* @__PURE__ */ import_react6.default.createElement(Row, null, /* @__PURE__ */ import_react6.default.createElement(Col_default, { id: "1", fillChar: "*", cols: 6 }, "REASCII"), /* @__PURE__ */ import_react6.default.createElement(Col_default, { id: "2", fillChar: ".", cols: 6, color: "var(--color-brand)" }, "\u25CB DAY")))));
+    return /* @__PURE__ */ import_react7.default.createElement(Reascii_default, null, /* @__PURE__ */ import_react7.default.createElement(GridCount_default, { color: "var(--color-contrast)" }), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "1", fillChar: "*", cols: 6 }, "REASCII"), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "2", fillChar: ".", cols: 6, color: "var(--color-brand)" }, "\u25CB DAY")), /* @__PURE__ */ import_react7.default.createElement(GridCount_default, null));
   };
   var App_default = App;
 
   // root.js
   var container = document.getElementById("root");
   var root = import_client.default.createRoot(container);
-  root.render(/* @__PURE__ */ import_react7.default.createElement(App_default, null));
+  root.render(/* @__PURE__ */ import_react8.default.createElement(App_default, null));
 })();
 /**
  * @license React
