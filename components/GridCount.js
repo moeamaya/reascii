@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import Column from './Column';
-import { LineCountProvider } from './useLineCount';
+import { Row } from './useRow';
 import { useCanvas } from './useCanvas';
 
 const GridCount = forwardRef(( prop, ref ) => {
@@ -9,7 +9,7 @@ const GridCount = forwardRef(( prop, ref ) => {
   const { color } = prop;
 
   return (
-    <LineCountProvider>
+    <Row>
       <div ref={ref} style={{ color: "#555" }}>
       <div>COLUMNS{"-".repeat(Math.max(asciiWidth - 7, 0))}</div>
         <Column id="1" fillChar="." cols={1} color="#777">▏1</Column>
@@ -27,7 +27,7 @@ const GridCount = forwardRef(( prop, ref ) => {
         <div style={{color: "#555"}}>{".".repeat(asciiWidth)}</div>
         <div style={{color: "#555"}}>{".".repeat(asciiWidth)}</div>
       </div>
-    </LineCountProvider>
+    </Row>
   );
 });
 
