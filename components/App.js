@@ -1,24 +1,19 @@
 import React from 'react'
-import Reascii from './Reascii'
-import { CanvasProvider } from './useCanvas';
+import Reascii, { Col, GridCount, Row } from './Reascii'
 
 const App = () => {
   return (
-    <>
-    <div>
-      <CanvasProvider>
-        <Reascii border={{top: " ▚", bottom: "▎"}} />
-      </CanvasProvider>
-    </div>
-
-     
-    <div style={{display: "none", marginTop: "2rem"}}>
-      <div>Title...................<a href="#" style={{color: "var(--color-brand)"}}>Menu</a>....................Longer text that stretch.........{"{╍}"}</div>
-      <div>................................................es over 3 very nice and ............</div>
-      <div>................................................clean lines, but also wh............</div>
-      <div>................................................at if it's crazy long...............</div>
-    </div>
-    </>
+    <Reascii>
+      <GridCount color="var(--color-contrast)" />
+      <Row>
+        <Col id="1" fillChar="*" cols={6}>REASCII</Col>
+        <Col id="2" fillChar="." cols={6} color="var(--color-brand)">○ DAY</Col>
+      </Row>
+      <GridCount />
+      <Row>
+        <Col id="1" fillChar="." cols={6} color="var(--color-brand)">○ NIGHT</Col>
+      </Row>
+    </Reascii>
   );
 }
 

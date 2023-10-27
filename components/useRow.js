@@ -1,13 +1,13 @@
 import React, { createContext, useContext, useState } from 'react';
 import { generateDOMText, extractLinesFromTextNode } from '../util/countLines';
 
-const LineCountContext = createContext();
+const RowContext = createContext();
 
-export function useLineCount() {
-  return useContext(LineCountContext);
+export function useRow() {
+  return useContext(RowContext);
 }
 
-export function LineCountProvider({ children }) {
+export function Row({ children }) {
   const [columnLineCounts, setColumnLineCounts] = useState({});
 
   const updateLineCount = (columnId, lineCount) => {
@@ -29,8 +29,8 @@ export function LineCountProvider({ children }) {
   }
 
   return (
-    <LineCountContext.Provider value={{ updateLineCount, getMaxLineCount, getLineCount }}>
+    <RowContext.Provider value={{ updateLineCount, getMaxLineCount, getLineCount }}>
       {children}
-    </LineCountContext.Provider>
+    </RowContext.Provider>
   );
 }

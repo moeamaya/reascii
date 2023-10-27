@@ -1000,7 +1000,7 @@
             }
             return dispatcher.useContext(Context);
           }
-          function useState5(initialState) {
+          function useState4(initialState) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useState(initialState);
           }
@@ -1800,7 +1800,7 @@
           exports.useMemo = useMemo;
           exports.useReducer = useReducer;
           exports.useRef = useRef2;
-          exports.useState = useState5;
+          exports.useState = useState4;
           exports.useSyncExternalStore = useSyncExternalStore;
           exports.useTransition = useTransition;
           exports.version = ReactVersion;
@@ -2296,9 +2296,9 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React8 = require_react();
+          var React9 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React8.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React9.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
@@ -3819,7 +3819,7 @@
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React8.Children.forEach(props.children, function(child) {
+                  React9.Children.forEach(props.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -11980,7 +11980,7 @@
             }
           }
           var fakeInternalInstance = {};
-          var emptyRefsObject = new React8.Component().refs;
+          var emptyRefsObject = new React9.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -22897,20 +22897,69 @@
   });
 
   // root.js
-  var import_react7 = __toESM(require_react());
+  var import_react8 = __toESM(require_react());
   var import_client = __toESM(require_client());
 
   // components/App.js
-  var import_react6 = __toESM(require_react());
+  var import_react7 = __toESM(require_react());
 
   // components/Reascii.js
-  var import_react5 = __toESM(require_react());
+  var import_react6 = __toESM(require_react());
 
-  // components/Column.js
-  var import_react3 = __toESM(require_react());
-
-  // components/useLineCount.js
+  // components/useCanvas.js
   var import_react = __toESM(require_react());
+  var CanvasContext = (0, import_react.createContext)();
+  function useCanvas() {
+    return (0, import_react.useContext)(CanvasContext);
+  }
+  function CanvasProvider({ children }) {
+    const [canvas, setCanvas] = (0, import_react.useState)({
+      canvasWidth: 0,
+      asciiWidth: 0,
+      characterWidth: 0
+    });
+    const updateCanvas = (canvas2) => {
+      setCanvas(canvas2);
+    };
+    return /* @__PURE__ */ import_react.default.createElement(CanvasContext.Provider, { value: { canvas, updateCanvas } }, children);
+  }
+
+  // components/Canvas.js
+  var import_react2 = __toESM(require_react());
+  var calculateCharacterWidth = (char) => {
+    const span = document.createElement("span");
+    span.style.visibility = "hidden";
+    span.innerText = char.repeat(25);
+    document.body.appendChild(span);
+    const width = span.offsetWidth / 25;
+    document.body.removeChild(span);
+    return width;
+  };
+  var Canvas = ({ fill, children }) => {
+    const parentContainerRef = (0, import_react2.useRef)();
+    const { updateCanvas } = useCanvas();
+    const fillChar = fill || ".";
+    (0, import_react2.useEffect)(() => {
+      if (parentContainerRef.current) {
+        const parentElement = parentContainerRef.current.parentNode;
+        if (parentElement) {
+          const canvasWidth = parentElement.clientWidth;
+          const characterWidth = calculateCharacterWidth(fillChar);
+          const asciiWidth = Math.floor(canvasWidth / characterWidth);
+          updateCanvas({
+            asciiWidth,
+            canvasWidth,
+            characterWidth
+          });
+        }
+      }
+    }, []);
+    return /* @__PURE__ */ import_react2.default.createElement("div", { ref: parentContainerRef, style: { outline: `1px solid transparent` } }, children);
+  };
+  var Canvas_default = Canvas;
+
+  // components/useRow.js
+  var import_react3 = __toESM(require_react());
 
   // util/countLines.ts
   var collapseWhiteSpace = (value) => {
@@ -22945,13 +22994,13 @@
     return lines.map((characters) => collapseWhiteSpace(characters.join("")));
   };
 
-  // components/useLineCount.js
-  var LineCountContext = (0, import_react.createContext)();
-  function useLineCount() {
-    return (0, import_react.useContext)(LineCountContext);
+  // components/useRow.js
+  var RowContext = (0, import_react3.createContext)();
+  function useRow() {
+    return (0, import_react3.useContext)(RowContext);
   }
-  function LineCountProvider({ children }) {
-    const [columnLineCounts, setColumnLineCounts] = (0, import_react.useState)({});
+  function Row({ children }) {
+    const [columnLineCounts, setColumnLineCounts] = (0, import_react3.useState)({});
     const updateLineCount = (columnId, lineCount) => {
       setColumnLineCounts((prevCounts) => ({
         ...prevCounts,
@@ -22967,121 +23016,70 @@
       const lines = extractLinesFromTextNode(textNode);
       return lines.length;
     };
-    return /* @__PURE__ */ import_react.default.createElement(LineCountContext.Provider, { value: { updateLineCount, getMaxLineCount, getLineCount } }, children);
+    return /* @__PURE__ */ import_react3.default.createElement(RowContext.Provider, { value: { updateLineCount, getMaxLineCount, getLineCount } }, children);
   }
 
-  // components/useCanvas.js
-  var import_react2 = __toESM(require_react());
-  var CanvasContext = (0, import_react2.createContext)();
-  function useCanvas() {
-    return (0, import_react2.useContext)(CanvasContext);
-  }
-  function CanvasProvider({ children }) {
-    const [canvas, setCanvas] = (0, import_react2.useState)({
-      canvasWidth: 0,
-      asciiWidth: 0,
-      characterWidth: 0
-    });
-    const updateCanvas = (canvas2) => {
-      setCanvas(canvas2);
-    };
-    return /* @__PURE__ */ import_react2.default.createElement(CanvasContext.Provider, { value: { canvas, updateCanvas } }, children);
-  }
-
-  // components/Column.js
-  var Column = ({ id, cols, children, fillChar, color, align = "left", childColor = "inherit" }) => {
-    const [fill, setFill] = (0, import_react3.useState)("");
-    const [count, setCount] = (0, import_react3.useState)(0);
-    const { getLineCount, updateLineCount, getMaxLineCount } = useLineCount();
+  // components/Col.js
+  var import_react4 = __toESM(require_react());
+  var Col = ({ id, cols, children, fillChar, color, align = "left", childColor = "inherit" }) => {
+    const [fill, setFill] = (0, import_react4.useState)("");
+    const [count, setCount] = (0, import_react4.useState)(0);
+    const { getLineCount, updateLineCount, getMaxLineCount } = useRow();
     const { canvas } = useCanvas();
     const { canvasWidth, asciiWidth, characterWidth } = canvas;
     const linesToRender = getMaxLineCount();
     const responsiveWidth = canvasWidth > 576 ? asciiWidth * (cols / 12) * characterWidth : canvasWidth;
-    (0, import_react3.useEffect)(() => {
+    (0, import_react4.useEffect)(() => {
       if (asciiWidth && fillChar) {
         const contentString = (Array.isArray(children) ? children : [children]).map(
           (child) => typeof child === "string" ? child : child.props ? child.props.children : ""
         ).join("");
         const contentLength = contentString.length;
-        const missingChars = asciiWidth - contentLength;
+        const missingChars = asciiWidth * (cols / 12) - contentLength;
         console.log(contentString, missingChars, asciiWidth, contentLength);
         if (missingChars > 0) {
           setFill(fillChar.repeat(missingChars));
         }
       }
     }, [asciiWidth, fillChar, children]);
-    (0, import_react3.useEffect)(() => {
+    (0, import_react4.useEffect)(() => {
       if (!asciiWidth)
         return;
       const lineCount = getLineCount(children, canvasWidth);
       setCount(lineCount);
       updateLineCount(id, lineCount);
     }, [id, children, asciiWidth]);
-    return /* @__PURE__ */ import_react3.default.createElement("div", { style: { display: "inline-block", width: `${responsiveWidth}px`, outline: "1px solid transparent" } }, fill && align === "right" && /* @__PURE__ */ import_react3.default.createElement("span", null, fill), /* @__PURE__ */ import_react3.default.createElement("span", { style: { color } }, children), fill && align === "left" && /* @__PURE__ */ import_react3.default.createElement("span", null, fill), linesToRender !== -Infinity && Array.from({ length: linesToRender - count }).map((_, index) => /* @__PURE__ */ import_react3.default.createElement("div", { key: index }, fillChar.repeat(asciiWidth))));
+    return /* @__PURE__ */ import_react4.default.createElement("div", { style: { display: "inline-block", width: `${responsiveWidth}px`, outline: "1px solid red", verticalAlign: "top" } }, fill && align === "right" && /* @__PURE__ */ import_react4.default.createElement("span", null, fill), /* @__PURE__ */ import_react4.default.createElement("span", { style: { color } }, children), fill && align === "left" && /* @__PURE__ */ import_react4.default.createElement("span", null, fill), linesToRender !== -Infinity && Array.from({ length: linesToRender - count }).map((_, index) => /* @__PURE__ */ import_react4.default.createElement("div", { key: index }, fillChar.repeat(asciiWidth))));
   };
-  var Column_default = Column;
+  var Col_default = Col;
 
   // components/GridCount.js
-  var import_react4 = __toESM(require_react());
-  var GridCount = (0, import_react4.forwardRef)((prop, ref) => {
+  var import_react5 = __toESM(require_react());
+  var GridCount = (0, import_react5.forwardRef)((prop, ref) => {
     const { canvas } = useCanvas();
     const { asciiWidth } = canvas;
     const { color } = prop;
-    return /* @__PURE__ */ import_react4.default.createElement(LineCountProvider, null, /* @__PURE__ */ import_react4.default.createElement("div", { ref, style: { color: "#555" } }, /* @__PURE__ */ import_react4.default.createElement("div", null, "COLUMNS", "-".repeat(Math.max(asciiWidth - 7, 0))), /* @__PURE__ */ import_react4.default.createElement(Column_default, { id: "1", fillChar: ".", cols: 1, color: "#777" }, "\u258F1"), /* @__PURE__ */ import_react4.default.createElement(Column_default, { id: "2", fillChar: ".", cols: 1, color: "#777" }, "\u258F2"), /* @__PURE__ */ import_react4.default.createElement(Column_default, { id: "3", fillChar: ".", cols: 1, color: "#777" }, "\u258F3"), /* @__PURE__ */ import_react4.default.createElement(Column_default, { id: "4", fillChar: ".", cols: 1, color: "#777" }, "\u258F4"), /* @__PURE__ */ import_react4.default.createElement(Column_default, { id: "5", fillChar: ".", cols: 1, color: "#777" }, "\u258F5"), /* @__PURE__ */ import_react4.default.createElement(Column_default, { id: "6", fillChar: ".", cols: 1, color: "#777" }, "\u258F6"), /* @__PURE__ */ import_react4.default.createElement(Column_default, { id: "7", fillChar: ".", cols: 1, color: "#777" }, "\u258F7"), /* @__PURE__ */ import_react4.default.createElement(Column_default, { id: "8", fillChar: ".", cols: 1, color: "#777" }, "\u258F8"), /* @__PURE__ */ import_react4.default.createElement(Column_default, { id: "9", fillChar: ".", cols: 1, color: "#777" }, "\u258F9"), /* @__PURE__ */ import_react4.default.createElement(Column_default, { id: "10", fillChar: ".", cols: 1, color: "#777" }, "\u258F10"), /* @__PURE__ */ import_react4.default.createElement(Column_default, { id: "11", fillChar: ".", cols: 1, color: "#777" }, "\u258F11"), /* @__PURE__ */ import_react4.default.createElement(Column_default, { id: "12", fillChar: ".", cols: 1, color: "#777" }, "\u258F12"), /* @__PURE__ */ import_react4.default.createElement("div", { style: { color: "#555" } }, ".".repeat(asciiWidth)), /* @__PURE__ */ import_react4.default.createElement("div", { style: { color: "#555" } }, ".".repeat(asciiWidth))));
+    return /* @__PURE__ */ import_react5.default.createElement(Row, null, /* @__PURE__ */ import_react5.default.createElement("div", { ref, style: { color: "#555" } }, /* @__PURE__ */ import_react5.default.createElement("div", null, "COLUMNS", "-".repeat(Math.max(asciiWidth - 7, 0))), /* @__PURE__ */ import_react5.default.createElement(Col_default, { id: "1", fillChar: ".", cols: 1, color: "#777" }, "\u258F1"), /* @__PURE__ */ import_react5.default.createElement(Col_default, { id: "2", fillChar: ".", cols: 1, color: "#777" }, "\u258F2"), /* @__PURE__ */ import_react5.default.createElement(Col_default, { id: "3", fillChar: ".", cols: 1, color: "#777" }, "\u258F3"), /* @__PURE__ */ import_react5.default.createElement(Col_default, { id: "4", fillChar: ".", cols: 1, color: "#777" }, "\u258F4"), /* @__PURE__ */ import_react5.default.createElement(Col_default, { id: "5", fillChar: ".", cols: 1, color: "#777" }, "\u258F5"), /* @__PURE__ */ import_react5.default.createElement(Col_default, { id: "6", fillChar: ".", cols: 1, color: "#777" }, "\u258F6"), /* @__PURE__ */ import_react5.default.createElement(Col_default, { id: "7", fillChar: ".", cols: 1, color: "#777" }, "\u258F7"), /* @__PURE__ */ import_react5.default.createElement(Col_default, { id: "8", fillChar: ".", cols: 1, color: "#777" }, "\u258F8"), /* @__PURE__ */ import_react5.default.createElement(Col_default, { id: "9", fillChar: ".", cols: 1, color: "#777" }, "\u258F9"), /* @__PURE__ */ import_react5.default.createElement(Col_default, { id: "10", fillChar: ".", cols: 1, color: "#777" }, "\u258F10"), /* @__PURE__ */ import_react5.default.createElement(Col_default, { id: "11", fillChar: ".", cols: 1, color: "#777" }, "\u258F11"), /* @__PURE__ */ import_react5.default.createElement(Col_default, { id: "12", fillChar: ".", cols: 1, color: "#777" }, "\u258F12"), /* @__PURE__ */ import_react5.default.createElement("div", { style: { color: "#555" } }, ".".repeat(asciiWidth)), /* @__PURE__ */ import_react5.default.createElement("div", { style: { color: "#555" } }, ".".repeat(asciiWidth))));
   });
   var GridCount_default = GridCount;
 
   // components/Reascii.js
-  var calculateCharacterWidth = (char) => {
-    const span = document.createElement("span");
-    span.style.visibility = "hidden";
-    span.innerText = char.repeat(25);
-    document.body.appendChild(span);
-    const width = span.offsetWidth / 25;
-    document.body.removeChild(span);
-    return width;
-  };
-  var Reascii = ({ border, padding, color, background, fill }) => {
-    const parentContainerRef = (0, import_react5.useRef)();
-    const { canvas, updateCanvas } = useCanvas();
-    const { asciiWidth } = canvas;
-    const borderStyle = {
-      top: border.top || ":",
-      bottom: border.bottom || ":"
-    };
-    const paddingValue = padding || 0;
-    const textColor = color || "var(--color-brand)";
-    const bgColor = background || "var(--color-contrast)";
+  var Reascii = ({ fill, children }) => {
     const fillChar = fill || ".";
-    (0, import_react5.useEffect)(() => {
-      if (parentContainerRef.current) {
-        const parentElement = parentContainerRef.current.parentNode;
-        if (parentElement) {
-          const parentWidth = parentElement.clientWidth;
-          const charWidth = calculateCharacterWidth(fillChar, textColor, bgColor);
-          const calculatedBorderWidth = Math.floor(parentWidth / charWidth);
-          updateCanvas({
-            canvasWidth: parentWidth,
-            asciiWidth: calculatedBorderWidth,
-            characterWidth: charWidth
-          });
-        }
-      }
-    }, []);
-    return /* @__PURE__ */ import_react5.default.createElement(import_react5.default.Fragment, null, /* @__PURE__ */ import_react5.default.createElement(GridCount_default, { color: bgColor }), /* @__PURE__ */ import_react5.default.createElement(LineCountProvider, null, /* @__PURE__ */ import_react5.default.createElement("div", { ref: parentContainerRef, style: { backgroundColor: bgColor, outline: `1px solid transparent` } }, /* @__PURE__ */ import_react5.default.createElement("div", { "data-ascii": borderStyle.top.repeat(asciiWidth) }, borderStyle.top.repeat(asciiWidth)), /* @__PURE__ */ import_react5.default.createElement("div", null, ".".repeat(asciiWidth)), /* @__PURE__ */ import_react5.default.createElement(Column_default, { id: "1", fillChar: "*", cols: 3 }, "REASCII"), /* @__PURE__ */ import_react5.default.createElement(Column_default, { id: "2", fillChar: ".", cols: 2, color: textColor }, "\u25CB DAY"), /* @__PURE__ */ import_react5.default.createElement(Column_default, { id: "3", fillChar: ".", cols: 2, color: textColor }, "\u25CB FEATURED APIS"), /* @__PURE__ */ import_react5.default.createElement(Column_default, { id: "4", fillChar: ".", cols: 2, color: textColor }, "\u25CB ABOUT"), /* @__PURE__ */ import_react5.default.createElement(Column_default, { id: "5", fillChar: ".", cols: 2, color: textColor }, "Testing this one with way more text than you should ever have"), /* @__PURE__ */ import_react5.default.createElement(Column_default, { id: "6", fillChar: ".", cols: 1, align: "right" }, "{}"))));
+    return /* @__PURE__ */ import_react6.default.createElement(CanvasProvider, null, /* @__PURE__ */ import_react6.default.createElement(Canvas_default, { fill: fillChar }, children));
   };
   var Reascii_default = Reascii;
 
   // components/App.js
   var App = () => {
-    return /* @__PURE__ */ import_react6.default.createElement(import_react6.default.Fragment, null, /* @__PURE__ */ import_react6.default.createElement("div", null, /* @__PURE__ */ import_react6.default.createElement(CanvasProvider, null, /* @__PURE__ */ import_react6.default.createElement(Reascii_default, { border: { top: " \u259A", bottom: "\u258E" } }))), /* @__PURE__ */ import_react6.default.createElement("div", { style: { display: "none", marginTop: "2rem" } }, /* @__PURE__ */ import_react6.default.createElement("div", null, "Title...................", /* @__PURE__ */ import_react6.default.createElement("a", { href: "#", style: { color: "var(--color-brand)" } }, "Menu"), "....................Longer text that stretch.........", "{\u254D}"), /* @__PURE__ */ import_react6.default.createElement("div", null, "................................................es over 3 very nice and ............"), /* @__PURE__ */ import_react6.default.createElement("div", null, "................................................clean lines, but also wh............"), /* @__PURE__ */ import_react6.default.createElement("div", null, "................................................at if it's crazy long...............")));
+    return /* @__PURE__ */ import_react7.default.createElement(Reascii_default, null, /* @__PURE__ */ import_react7.default.createElement(GridCount_default, { color: "var(--color-contrast)" }), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "1", fillChar: "*", cols: 6 }, "REASCII"), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "2", fillChar: ".", cols: 6, color: "var(--color-brand)" }, "\u25CB DAY")), /* @__PURE__ */ import_react7.default.createElement(GridCount_default, null), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "1", fillChar: ".", cols: 6, color: "var(--color-brand)" }, "\u25CB NIGHT")));
   };
   var App_default = App;
 
   // root.js
   var container = document.getElementById("root");
   var root = import_client.default.createRoot(container);
-  root.render(/* @__PURE__ */ import_react7.default.createElement(App_default, null));
+  root.render(/* @__PURE__ */ import_react8.default.createElement(App_default, null));
 })();
 /**
  * @license React

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useLineCount } from './useLineCount';
+import { useRow } from './useRow';
 import { useCanvas } from './useCanvas';
 
-const Column = ({ id, cols, children, fillChar, color, align = 'left', childColor = 'inherit' }) => {
+const Col = ({ id, cols, children, fillChar, color, align = 'left', childColor = 'inherit' }) => {
   const [fill, setFill] = useState('');
   const [count, setCount] = useState(0);
-  const { getLineCount, updateLineCount, getMaxLineCount } = useLineCount();
+  const { getLineCount, updateLineCount, getMaxLineCount } = useRow();
   const { canvas } = useCanvas();
   const { canvasWidth, asciiWidth, characterWidth } = canvas;
 
@@ -23,8 +23,13 @@ const Column = ({ id, cols, children, fillChar, color, align = 'left', childColo
         )
         .join('');
       const contentLength = contentString.length;
-      // const missingChars = (asciiWidth * (cols/12)) - contentLength;
-      const missingChars = asciiWidth - contentLength;
+      
+      // Desktop
+      const missingChars = (asciiWidth * (cols/12)) - contentLength;
+
+      // Mobile
+      // const missingChars = asciiWidth - contentLength;
+
       console.log(contentString, missingChars, asciiWidth, contentLength)
       if (missingChars > 0) {
         setFill(fillChar.repeat(missingChars));
@@ -44,7 +49,7 @@ const Column = ({ id, cols, children, fillChar, color, align = 'left', childColo
   }, [id, children, asciiWidth]);
 
   return (
-    <div style={{display: "inline-block", width: `${(responsiveWidth)}px`, outline: "1px solid transparent"}}>
+    <div style={{display: "inline-block", width: `${(responsiveWidth)}px`, outline: "1px solid red", verticalAlign: "top"}}>
       {fill && align === 'right' && <span>{fill}</span>}
       <span style={{color}}>{children}</span>
       {fill && align === 'left' && <span>{fill}</span>}
@@ -57,4 +62,4 @@ const Column = ({ id, cols, children, fillChar, color, align = 'left', childColo
     </div>
   );
 };
-export default Column;
+export default Col;
