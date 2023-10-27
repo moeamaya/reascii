@@ -23072,7 +23072,7 @@
 
   // components/App.js
   var App = () => {
-    return /* @__PURE__ */ import_react7.default.createElement(Reascii_default, null, /* @__PURE__ */ import_react7.default.createElement(GridCount_default, { color: "var(--color-contrast)" }), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "1", fillChar: "*", cols: 6 }, "REASCII"), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "2", fillChar: ".", cols: 6, color: "var(--color-brand)" }, "\u25CB DAY")), /* @__PURE__ */ import_react7.default.createElement(GridCount_default, null), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "1", fillChar: ".", cols: 6, color: "var(--color-brand)" }, "\u25CB NIGHT")));
+    return /* @__PURE__ */ import_react7.default.createElement(Reascii_default, null, /* @__PURE__ */ import_react7.default.createElement(GridCount_default, null), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "1", fillChar: "*", cols: 6 }, "REASCII"), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "2", fillChar: ".", cols: 6, color: "var(--color-brand)" }, "\u25CB DAY")), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "1", fillChar: ".", cols: 6, color: "var(--color-brand)" }, "\u25CB NIGHT")));
   };
   var App_default = App;
 
