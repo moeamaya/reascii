@@ -1,7 +1,8 @@
 {
   "scripts": {
     "web": "web-dev-server --open / --node-resolve --watch",
-    "dev": "esbuild root.js --bundle --outfile=index.js --loader:.js=jsx --watch"
+    "lib": "esbuild root.js --bundle --outfile=index.js --loader:.js=jsx --watch",
+    "dev": "concurrently \"pnpm run web\" \"pnpm run lib\""
   },
   "devDependencies": {
     "@web/dev-server": "^0.0.25",
