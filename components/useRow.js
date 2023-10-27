@@ -30,7 +30,9 @@ export function Row({ children }) {
 
   return (
     <RowContext.Provider value={{ updateLineCount, getMaxLineCount, getLineCount }}>
-      {children}
+      <div>
+        {children}
+      </div>
     </RowContext.Provider>
   );
 }

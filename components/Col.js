@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useRow } from './useRow';
 import { useCanvas } from './useCanvas';
 
-const Col = ({ id, cols, children, fillChar, color, align = 'left', childColor = 'inherit' }) => {
+const Col = ({ id, cols, children, fillChar = ".", color, align = 'left' }) => {
   const [fill, setFill] = useState('');
   const [count, setCount] = useState(0);
   const { getLineCount, updateLineCount, getMaxLineCount } = useRow();
@@ -12,11 +12,10 @@ const Col = ({ id, cols, children, fillChar, color, align = 'left', childColor =
   const linesToRender = getMaxLineCount();
   // const responsiveDivider = canvasWidth > 576 ? 3 : 1;
   const responsiveWidth = canvasWidth > 576 ? asciiWidth * (cols/12) * characterWidth : canvasWidth;
-
   
-  // Fills the column with the fillChar if the content is too short
+  // Fills the column with the fillCharacter if the content is too short
   useEffect(() => {
-    if (asciiWidth && fillChar) {
+    if (asciiWidth) {
       const contentString = (Array.isArray(children) ? children : [children])
         .map((child) =>
           typeof child === 'string' ? child : child.props ? child.props.children : ''
@@ -30,7 +29,7 @@ const Col = ({ id, cols, children, fillChar, color, align = 'left', childColor =
       // Mobile
       // const missingChars = asciiWidth - contentLength;
 
-      console.log(contentString, missingChars, asciiWidth, contentLength)
+      // console.log(contentString, missingChars, asciiWidth, contentLength)
       if (missingChars > 0) {
         setFill(fillChar.repeat(missingChars));
       }
@@ -43,7 +42,7 @@ const Col = ({ id, cols, children, fillChar, color, align = 'left', childColor =
   // You don't need more lines in a vertical layout
   useEffect(() => {
     if (!asciiWidth) return;
-    const lineCount = getLineCount(children, canvasWidth);
+    const lineCount = getLineCount(children, responsiveWidth);
     setCount(lineCount);
     updateLineCount(id, lineCount);
   }, [id, children, asciiWidth]);
@@ -56,7 +55,7 @@ const Col = ({ id, cols, children, fillChar, color, align = 'left', childColor =
       {/* Render additional fill lines if necessary */}
       {linesToRender !== -Infinity && Array.from({ length: linesToRender - count }).map((_, index) => (
         <div key={index}>
-          {fillChar.repeat(asciiWidth)}
+          {fillChar.repeat(asciiWidth * (cols/12))}
         </div>
       ))}
     </div>

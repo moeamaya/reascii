@@ -23016,12 +23016,12 @@
       const lines = extractLinesFromTextNode(textNode);
       return lines.length;
     };
-    return /* @__PURE__ */ import_react3.default.createElement(RowContext.Provider, { value: { updateLineCount, getMaxLineCount, getLineCount } }, children);
+    return /* @__PURE__ */ import_react3.default.createElement(RowContext.Provider, { value: { updateLineCount, getMaxLineCount, getLineCount } }, /* @__PURE__ */ import_react3.default.createElement("div", null, children));
   }
 
   // components/Col.js
   var import_react4 = __toESM(require_react());
-  var Col = ({ id, cols, children, fillChar, color, align = "left", childColor = "inherit" }) => {
+  var Col = ({ id, cols, children, fillChar = ".", color, align = "left" }) => {
     const [fill, setFill] = (0, import_react4.useState)("");
     const [count, setCount] = (0, import_react4.useState)(0);
     const { getLineCount, updateLineCount, getMaxLineCount } = useRow();
@@ -23030,13 +23030,12 @@
     const linesToRender = getMaxLineCount();
     const responsiveWidth = canvasWidth > 576 ? asciiWidth * (cols / 12) * characterWidth : canvasWidth;
     (0, import_react4.useEffect)(() => {
-      if (asciiWidth && fillChar) {
+      if (asciiWidth) {
         const contentString = (Array.isArray(children) ? children : [children]).map(
           (child) => typeof child === "string" ? child : child.props ? child.props.children : ""
         ).join("");
         const contentLength = contentString.length;
         const missingChars = asciiWidth * (cols / 12) - contentLength;
-        console.log(contentString, missingChars, asciiWidth, contentLength);
         if (missingChars > 0) {
           setFill(fillChar.repeat(missingChars));
         }
@@ -23045,11 +23044,11 @@
     (0, import_react4.useEffect)(() => {
       if (!asciiWidth)
         return;
-      const lineCount = getLineCount(children, canvasWidth);
+      const lineCount = getLineCount(children, responsiveWidth);
       setCount(lineCount);
       updateLineCount(id, lineCount);
     }, [id, children, asciiWidth]);
-    return /* @__PURE__ */ import_react4.default.createElement("div", { style: { display: "inline-block", width: `${responsiveWidth}px`, outline: "1px solid red", verticalAlign: "top" } }, fill && align === "right" && /* @__PURE__ */ import_react4.default.createElement("span", null, fill), /* @__PURE__ */ import_react4.default.createElement("span", { style: { color } }, children), fill && align === "left" && /* @__PURE__ */ import_react4.default.createElement("span", null, fill), linesToRender !== -Infinity && Array.from({ length: linesToRender - count }).map((_, index) => /* @__PURE__ */ import_react4.default.createElement("div", { key: index }, fillChar.repeat(asciiWidth))));
+    return /* @__PURE__ */ import_react4.default.createElement("div", { style: { display: "inline-block", width: `${responsiveWidth}px`, outline: "1px solid red", verticalAlign: "top" } }, fill && align === "right" && /* @__PURE__ */ import_react4.default.createElement("span", null, fill), /* @__PURE__ */ import_react4.default.createElement("span", { style: { color } }, children), fill && align === "left" && /* @__PURE__ */ import_react4.default.createElement("span", null, fill), linesToRender !== -Infinity && Array.from({ length: linesToRender - count }).map((_, index) => /* @__PURE__ */ import_react4.default.createElement("div", { key: index }, fillChar.repeat(asciiWidth * (cols / 12)))));
   };
   var Col_default = Col;
 
@@ -23072,7 +23071,7 @@
 
   // components/App.js
   var App = () => {
-    return /* @__PURE__ */ import_react7.default.createElement(Reascii_default, null, /* @__PURE__ */ import_react7.default.createElement(GridCount_default, null), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "1", fillChar: "*", cols: 6 }, "REASCII"), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "2", fillChar: ".", cols: 6, color: "var(--color-brand)" }, "\u25CB DAY")), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "1", fillChar: ".", cols: 6, color: "var(--color-brand)" }, "\u25CB NIGHT")));
+    return /* @__PURE__ */ import_react7.default.createElement(Reascii_default, null, /* @__PURE__ */ import_react7.default.createElement(GridCount_default, null), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "1", fillChar: "*", cols: 3 }, "REASCII"), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "2", cols: 2, color: "var(--color-brand)" }, "\u25CB DAY"), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "3", cols: 2, color: "var(--color-brand)" }, "\u25CB FEATURED APIS"), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "4", cols: 2, color: "var(--color-brand)" }, "\u25CB ABOUT"), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "5", cols: 2 }, "Testing this longer set of text to see how it wraps and making sure we handle it in code"), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "6", cols: 1, color: "var(--color-brand)", align: "right" }, "{}")), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "1", cols: 6 }, "Sup"), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "2", cols: 6 }, "Dude")));
   };
   var App_default = App;
 
