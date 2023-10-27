@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useRow } from './useRow';
 import { useCanvas } from './useCanvas';
 
-const Column = ({ id, cols, children, fillChar, color, align = 'left', childColor = 'inherit' }) => {
+const Col = ({ id, cols, children, fillChar, color, align = 'left', childColor = 'inherit' }) => {
   const [fill, setFill] = useState('');
   const [count, setCount] = useState(0);
   const { getLineCount, updateLineCount, getMaxLineCount } = useRow();
@@ -62,4 +62,4 @@ const Column = ({ id, cols, children, fillChar, color, align = 'left', childColo
     </div>
   );
 };
-export default Column;
+export default Col;
