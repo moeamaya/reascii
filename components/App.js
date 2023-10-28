@@ -6,19 +6,98 @@ const App = () => {
     <Reascii>
       <GridCount />
       <Row>
-        <Col id="1" fillChar="*" cols={3}>REASCII</Col>
-        <Col id="2" cols={2} color="var(--color-brand)">○ DAY</Col>
-        <Col id="3" cols={2} color="var(--color-brand)">○ FEATURED APIS</Col>
-        <Col id="4" cols={2} color="var(--color-brand)">○ ABOUT</Col>
-        <Col id="5" cols={2}>
-          Testing this longer set of text to see how it wraps
-          and making sure we handle it in code
-        </Col>
-        <Col id="6" cols={1} color="var(--color-brand)" align="right">{"{}"}</Col>
+        <Col id="1" fillChar=" ▒" cols={3}>▒ </Col>
+        <Col id="2" cols={6} color="var(--color-brand)">.</Col>
+        <Col id="3" fillChar="▒ " cols={3}>▒ </Col>
       </Row>
       <Row>
-        <Col id="1" cols={6}>Sup</Col>
-        <Col id="2" cols={6}>Dude</Col>
+        <Col id="1" fillChar=" ▒ " cols={3}>▒ </Col>
+        <Col id="2" cols={6} fillChar=" " color="#DA8FDE"> </Col>
+        <Col id="3" fillChar=" ▒ " cols={3}>▒ </Col>
+      </Row>
+      <Row>
+        <Col id="1" fillChar=" ▒ " cols={3}>Menu</Col>
+        <Col id="2" cols={6} fillChar=" "color="var(--color-brand)">
+          . REASCII.JS
+        </Col>
+        <Col id="3" fillChar=" ▒ " cols={3}>▒ </Col>
+      </Row>
+      <Row>
+        <Col id="1" fillChar=" ▒ " cols={3}>↳ 〖 ABOUT</Col>
+        <Col id="2" fillChar=" " cols={6} color="var(--color-brand)"> </Col>
+        <Col id="3" fillChar=" ▒ " cols={3}>▒ </Col>
+      </Row>
+      <Row>
+        <Col id="1" fillChar=" ▒ " cols={3}>↳ ○ GET STARTED</Col>
+        <Col id="2" cols={6} fillChar="›" color="#DA8FDE">
+          . Responsive ascii layouts in React
+        </Col>
+        <Col id="3" fillChar=" ▒ " cols={3}>▒ </Col>
+      </Row>
+      <Row>
+        <Col id="1" fillChar=" ▒ " cols={3}>↳ ╰ DOCS</Col>
+        <Col id="2" fillChar=" " cols={6}> </Col>
+        <Col id="3" fillChar=" ▒ " cols={3}>▒ </Col>
+      </Row>
+      <Row>
+        <Col id="1" fillChar=" ▒" cols={3}> </Col>
+        <Col id="2" fillChar="." cols={6}> </Col>
+        <Col id="3" fillChar=" ▒" cols={3}> </Col>
+      </Row>
+      <Row>
+        <Col id="1" fillChar=" " cols={3}> </Col>
+        <Col id="2" fillChar=" " cols={6} color="#ECF057">. QUICK EXAMPLE</Col>
+        <Col id="3" fillChar=" " cols={3}> </Col>
+      </Row>
+      <Row>
+        <Col id="1" fillChar=" " cols={3}> </Col>
+        <Col id="2" fillChar="═" cols={6} color="#ECF057">&nbsp;╔</Col>
+        <Col id="3" fillChar=" " cols={3}> </Col>
+      </Row>
+      <Row>
+        <Col id="1" fillChar=" " cols={3}> </Col>
+        <Col id="2" fillChar=" " cols={6} color="#ECF057">&nbsp;║</Col>
+        <Col id="3" fillChar=" " cols={3}> </Col>
+      </Row>
+      <Row>
+        <Col id="1" fillChar=" " cols={3}> </Col>
+        <Col id="2" fillChar=" " cols={6} color="#ECF057">&nbsp;║ {"<Reascii>"}</Col>
+        <Col id="3" fillChar=" " cols={3}> </Col>
+      </Row>
+      <Row>
+        <Col id="1" fillChar=" " cols={3}> </Col>
+        <Col id="2" fillChar=" " cols={6} color="#ECF057">&nbsp;║ &nbsp;&nbsp;{"<Row>"}</Col>
+        <Col id="3" fillChar=" " cols={3}> </Col>
+      </Row>
+      <Row>
+        <Col id="1" fillChar=" " cols={3}> </Col>
+        <Col id="2" fillChar=" " cols={6} color="#ECF057">&nbsp;║ &nbsp;&nbsp;&nbsp;&nbsp;{'<Col cols="6">Re</Col>'}</Col>
+        <Col id="3" fillChar=" " cols={3}> </Col>
+      </Row>
+      <Row>
+        <Col id="1" fillChar=" " cols={3}> </Col>
+        <Col id="2" fillChar=" " cols={6} color="#ECF057">&nbsp;║ &nbsp;&nbsp;&nbsp;&nbsp;{'<Col cols="6">ascii</Col>'}</Col>
+        <Col id="3" fillChar=" " cols={3}> </Col>
+      </Row>
+      <Row>
+        <Col id="1" fillChar=" " cols={3}> </Col>
+        <Col id="2" fillChar=" " cols={6} color="#ECF057">&nbsp;║ &nbsp;&nbsp;{"</Row>"}</Col>
+        <Col id="3" fillChar=" " cols={3}> </Col>
+      </Row>
+      <Row>
+        <Col id="1" fillChar=" " cols={3}> </Col>
+        <Col id="2" fillChar=" " cols={6} color="#ECF057">&nbsp;║ {"</Reascii>"}</Col>
+        <Col id="3" fillChar=" " cols={3}> </Col>
+      </Row>
+      <Row>
+        <Col id="1" fillChar=" " cols={3}> </Col>
+        <Col id="2" fillChar=" " cols={6} color="#ECF057">&nbsp;║</Col>
+        <Col id="3" fillChar=" " cols={3}> </Col>
+      </Row>
+      <Row>
+        <Col id="1" fillChar=" " cols={3}> </Col>
+        <Col id="2" fillChar="═" cols={6} color="#ECF057">&nbsp;╚</Col>
+        <Col id="3" fillChar=" " cols={3}> </Col>
       </Row>
     </Reascii>
   );

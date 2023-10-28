@@ -48,7 +48,7 @@ const Col = ({ id, cols, children, fillChar = ".", color, align = 'left' }) => {
   }, [id, children, asciiWidth]);
 
   return (
-    <div style={{display: "inline-block", width: `${(responsiveWidth)}px`, outline: "1px solid red", verticalAlign: "top"}}>
+    <div style={{display: "inline-block", width: `${(responsiveWidth)}px`, outline: "1px solid transparent", verticalAlign: "top"}}>
       {fill && align === 'right' && <span>{fill}</span>}
       <span style={{color}}>{children}</span>
       {fill && align === 'left' && <span>{fill}</span>}
