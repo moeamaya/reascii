@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useRow } from './useRow';
 import { useCanvas } from './useCanvas';
 
-const Col = ({ id, cols, children, fillChar = ".", color, align = 'left' }) => {
+const Col = ({ id, cols, children, fillChar = ".", color, align = 'left', lines = null, fillColor = "inherit" }) => {
   const [fill, setFill] = useState('');
   const [count, setCount] = useState(0);
   const { getLineCount, updateLineCount, getMaxLineCount } = useRow();
@@ -31,7 +31,7 @@ const Col = ({ id, cols, children, fillChar = ".", color, align = 'left' }) => {
 
       // console.log(contentString, missingChars, asciiWidth, contentLength)
       if (missingChars > 0) {
-        setFill(fillChar.repeat(missingChars));
+        setFill(fillChar.repeat(missingChars / fillChar.length));
       }
     }
   }, [asciiWidth, fillChar, children]);
@@ -42,19 +42,20 @@ const Col = ({ id, cols, children, fillChar = ".", color, align = 'left' }) => {
   // You don't need more lines in a vertical layout
   useEffect(() => {
     if (!asciiWidth) return;
-    const lineCount = getLineCount(children, responsiveWidth);
+    const lineCount = lines ? lines: getLineCount(children, responsiveWidth);
     setCount(lineCount);
     updateLineCount(id, lineCount);
   }, [id, children, asciiWidth]);
 
   return (
     <div style={{display: "inline-block", width: `${(responsiveWidth)}px`, outline: "1px solid transparent", verticalAlign: "top"}}>
-      {fill && align === 'right' && <span>{fill}</span>}
+      {fill && align === 'right' && <span style={{color: fillColor}}>{fill}</span>}
       <span style={{color}}>{children}</span>
-      {fill && align === 'left' && <span>{fill}</span>}
+      {fill && align === 'left' && <span style={{color: fillColor}}>{fill}</span>}
+
       {/* Render additional fill lines if necessary */}
-      {linesToRender !== -Infinity && Array.from({ length: linesToRender - count }).map((_, index) => (
-        <div key={index}>
+      {linesToRender !== -Infinity && Array.from({ length: lines ? lines - 1 : linesToRender - count }).map((_, index) => (
+        <div key={index} style={{color: fillColor}}>
           {fillChar.repeat(asciiWidth * (cols/12))}
         </div>
       ))}

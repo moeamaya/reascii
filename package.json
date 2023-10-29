@@ -8,7 +8,7 @@
     "@web/dev-server": "^0.0.25",
     "esbuild": "^0.15.16"
   },
-  "name": "@robotist/website",
+  "name": "reascii",
   "description": "Robotist website",
   "version": "0.0.1",
   "main": "dist/robotist.js",
