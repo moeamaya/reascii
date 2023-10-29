@@ -6,6 +6,27 @@ const App = () => {
     <Reascii>
       <GridCount />
       <Row>
+        <Col id="1" fillChar="─" cols={12}>│</Col>
+      </Row>
+      <Row>
+        <Col id="1" fillChar="╱╲" cols={12} fillColor="#DA8FDE">│</Col>
+      </Row>
+      <Row>
+        <Col id="1" fillChar="─" cols={12}>│</Col>
+      </Row>
+      <Row>
+        <Col id="1" fillChar="&nbsp;° ┘ └ °&nbsp;" cols={12}>│</Col>
+      </Row>
+      <Row>
+        <Col id="1" fillChar="&nbsp;&nbsp;╝&nbsp;&nbsp;&nbsp;╚&nbsp;&nbsp;" cols={12}>│</Col>
+      </Row>
+      <Row>
+        <Col id="1" fillChar="─" cols={12}>│</Col>
+      </Row>
+      <Row>
+        <Col id="1" fillChar=" " cols={12}> </Col>
+      </Row>
+      <Row>
         <Col id="1" fillChar="&nbsp;▒" cols={3} color="var(--color-brand)" fillColor="var(--color-brand)">&nbsp;▒</Col>
         <Col id="2" cols={6} color="var(--color-brand)">.</Col>
         <Col id="3" fillChar="&nbsp;▒" cols={3} color="var(--color-brand)" fillColor="var(--color-brand)">&nbsp;▒</Col>
@@ -84,7 +105,7 @@ const App = () => {
       </Row>
       <Row>
         <Col id="1" fillChar=" " cols={3}> </Col>
-        <Col id="2" fillChar="═" cols={6} color="#ECF057">&nbsp;╔</Col>
+        <Col id="2" fillChar="═" cols={6} color="#ECF057" fillColor="#ECF057">&nbsp;╔</Col>
         <Col id="3" fillChar=" " cols={3}> </Col>
       </Row>
       <Row>
@@ -129,7 +150,7 @@ const App = () => {
       </Row>
       <Row>
         <Col id="1" fillChar=" " cols={3}> </Col>
-        <Col id="2" fillChar="═" cols={6} color="#ECF057">&nbsp;╚</Col>
+        <Col id="2" fillChar="═" cols={6} color="#ECF057" fillColor="#ECF057">&nbsp;╚</Col>
         <Col id="3" fillChar=" " cols={3}> </Col>
       </Row>
       <Row>
