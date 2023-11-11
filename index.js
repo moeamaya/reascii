@@ -2296,9 +2296,9 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React9 = require_react();
+          var React11 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React9.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React11.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
@@ -3819,7 +3819,7 @@
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React9.Children.forEach(props.children, function(child) {
+                  React11.Children.forEach(props.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -11980,7 +11980,7 @@
             }
           }
           var fakeInternalInstance = {};
-          var emptyRefsObject = new React9.Component().refs;
+          var emptyRefsObject = new React11.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -22897,11 +22897,11 @@
   });
 
   // root.js
-  var import_react8 = __toESM(require_react());
+  var import_react10 = __toESM(require_react());
   var import_client = __toESM(require_client());
 
   // components/App.js
-  var import_react7 = __toESM(require_react());
+  var import_react9 = __toESM(require_react());
 
   // components/Reascii.js
   var import_react6 = __toESM(require_react());
@@ -23032,13 +23032,15 @@
     fillColor = "inherit",
     cap = null
   }) => {
+    const BLANK = "\xA0";
+    const COLUMNS = 12;
     const [fill, setFill] = (0, import_react4.useState)("");
     const [count, setCount] = (0, import_react4.useState)(0);
     const { getLineCount, updateLineCount, getMaxLineCount } = useRow();
     const { canvas } = useCanvas();
     const { canvasWidth, asciiWidth, characterWidth } = canvas;
     const linesToRender = getMaxLineCount();
-    const responsiveWidth = canvasWidth > 576 ? asciiWidth * (cols / 12) * characterWidth : canvasWidth;
+    const responsiveWidth = canvasWidth > 576 ? asciiWidth * (cols / COLUMNS) * characterWidth : canvasWidth;
     (0, import_react4.useEffect)(() => {
       if (asciiWidth) {
         const contentString = (Array.isArray(children) ? children : [children]).map((child) => {
@@ -23052,9 +23054,21 @@
           }
         }).join("");
         const contentLength = contentString.length;
-        const missingChars = asciiWidth * (cols / 12) - contentLength - (cap ? cap.length : 0);
+        const minChars = Math.floor(asciiWidth * (cols / COLUMNS));
+        const missingChars = asciiWidth * (cols / COLUMNS) - contentLength - (cap ? cap.length : 0);
         if (missingChars > 0) {
-          setFill(fillChar.repeat(missingChars / fillChar.length));
+          let currentFillChar = fillChar.repeat(missingChars / fillChar.length);
+          const emptySpace = parseInt(minChars) - (parseInt(currentFillChar.length) + parseInt(contentString.length)) - 1;
+          console.log(
+            "content: " + contentString,
+            "minChars: " + minChars,
+            "currentFillChar:" + currentFillChar.length,
+            "contentLength: " + contentString.length,
+            "totalChars: " + (parseInt(currentFillChar.length) + parseInt(contentString.length)),
+            "emptySpace: " + emptySpace
+          );
+          emptySpace > 0 ? currentFillChar += BLANK.repeat(emptySpace) : currentFillChar;
+          setFill(currentFillChar);
         }
       }
     }, [asciiWidth, fillChar, children]);
@@ -23065,6 +23079,24 @@
       setCount(lineCount);
       updateLineCount(id, lineCount);
     }, [id, children, asciiWidth]);
+    const renderAdditionalFillLines = () => {
+      return linesToRender !== -Infinity && Array.from({ length: lines ? lines - 1 : linesToRender - count }).map(
+        (_, index) => {
+          const fillCount = (asciiWidth * (cols / COLUMNS) - (cap ? cap.length : 0)) / fillChar.length;
+          const fill2 = fillChar.repeat(fillCount);
+          const line = cap ? fill2 + cap : fill2;
+          return /* @__PURE__ */ import_react4.default.createElement(
+            "div",
+            {
+              "data-count": fillCount,
+              key: index,
+              style: { color: fillColor }
+            },
+            line
+          );
+        }
+      );
+    };
     return /* @__PURE__ */ import_react4.default.createElement(
       "div",
       {
@@ -23078,9 +23110,7 @@
       fill && align === "right" && /* @__PURE__ */ import_react4.default.createElement("span", { style: { color: fillColor } }, fill, cap),
       /* @__PURE__ */ import_react4.default.createElement("span", { style: { color } }, children),
       fill && align === "left" && /* @__PURE__ */ import_react4.default.createElement("span", { style: { color: fillColor } }, fill, cap),
-      linesToRender !== -Infinity && Array.from({ length: lines ? lines - 1 : linesToRender - count }).map(
-        (_, index) => /* @__PURE__ */ import_react4.default.createElement("div", { key: index, style: { color: fillColor } }, fillChar.repeat(asciiWidth * (cols / 12)))
-      )
+      renderAdditionalFillLines()
     );
   };
   var Col_default = Col;
@@ -23102,18 +23132,10 @@
   };
   var Reascii_default = Reascii;
 
-  // components/App.js
-  var App = () => {
-    return /* @__PURE__ */ import_react7.default.createElement(Reascii_default, null, /* @__PURE__ */ import_react7.default.createElement(GridCount_default, null), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "1", fillChar: "\u2500", cols: 12, cap: "\u2502" }, "\u2502!543^")), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "1", fillChar: "\u2571\u2572", cols: 12, fillColor: "#DA8FDE", cap: "\u2502" }, "\u2502")), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "1", fillChar: "\u2500", cols: 12, cap: "\u2502" }, "\u2502")), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "1", fillChar: "\xA0\xB0 \u2518 \u2514 \xB0\xA0", cols: 12, cap: "\u2502" }, "\u2502")), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(
-      Col_default,
-      {
-        id: "1",
-        fillChar: "\xA0\xA0\u255D\xA0\xA0\xA0\u255A\xA0\xA0",
-        cols: 12,
-        cap: "\u2502"
-      },
-      "\u2502"
-    )), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "1", fillChar: "\u2500", cols: 12, cap: "\u2502" }, "\u2502")), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "1", fillChar: " ", cols: 12 })), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(
+  // components/Body.js
+  var import_react7 = __toESM(require_react());
+  var Body = () => {
+    return /* @__PURE__ */ import_react7.default.createElement(import_react7.default.Fragment, null, /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "1", fillChar: "\u2500", cols: 12, cap: "\u2502" }, "\u2502")), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "1", fillChar: " ", cols: 12 })), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(
       Col_default,
       {
         id: "1",
@@ -23320,10 +23342,11 @@
         fillChar: "\u2592\xA0",
         cols: 3,
         color: "var(--color-brand)",
-        fillColor: "var(--color-brand)"
+        fillColor: "var(--color-brand)",
+        cap: "**"
       },
       "\u2592\xA0"
-    ), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "2", cols: 6, fillChar: " " }, ". Reascii is a React library that simplifies.."), /* @__PURE__ */ import_react7.default.createElement(
+    ), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "2", cols: 6, fillChar: " " }, "Reascii is a versatile React library designed to make it easy for developers to create and render ASCII art within their web applications. With Reascii, you can effortlessly build intricate and responsive ASCII layouts, making it perfect for displaying unique text-based content in your projects. This library empowers developers to compose complex ASCII structures using familiar JSX syntax, offering flexibility, control, and a rich feature set for creating stunning visual presentations in the browser. Whether you're developing a creative website or simply want to add a touch of ASCII art to your application, Reascii is the ideal tool for bringing this timeless art form to the digital realm with elegance and ease."), /* @__PURE__ */ import_react7.default.createElement(
       Col_default,
       {
         id: "3",
@@ -23408,12 +23431,34 @@
       "\xA0\u255A"
     ), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "3", fillChar: " ", cols: 3 })), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "1", fillChar: "*", cols: 3, lines: "5" }, "Hi"), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "2", fillChar: "\u2550", cols: 6 }, "\u255A"), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "3", fillChar: "@", cols: 3 }, "Hello")));
   };
+  var Body_default = Body;
+
+  // components/Header.js
+  var import_react8 = __toESM(require_react());
+  var Header = () => {
+    return /* @__PURE__ */ import_react8.default.createElement(import_react8.default.Fragment, null, /* @__PURE__ */ import_react8.default.createElement(Row, null, /* @__PURE__ */ import_react8.default.createElement(Col_default, { id: "1", fillChar: "\u2500", cols: 12, cap: "\u2502" }, "\u2502!54321")), /* @__PURE__ */ import_react8.default.createElement(Row, null, /* @__PURE__ */ import_react8.default.createElement(Col_default, { id: "1", fillChar: "\u2571\u2572", cols: 12, fillColor: "#DA8FDE", cap: "\u2502" }, "\u2502")), /* @__PURE__ */ import_react8.default.createElement(Row, null, /* @__PURE__ */ import_react8.default.createElement(Col_default, { id: "1", fillChar: "\u2500", cols: 12, cap: "\u2502" }, "\u2502")), /* @__PURE__ */ import_react8.default.createElement(Row, null, /* @__PURE__ */ import_react8.default.createElement(Col_default, { id: "1", fillChar: "\xA0\xB0 \u2518 \u2514 \xB0\xA0", cols: 12, cap: "\u2502" }, "\u2502")), /* @__PURE__ */ import_react8.default.createElement(Row, null, /* @__PURE__ */ import_react8.default.createElement(
+      Col_default,
+      {
+        id: "1",
+        fillChar: "\xA0\xA0\u255D\xA0\xA0\xA0\u255A\xA0\xA0",
+        cols: 12,
+        cap: "\u2502"
+      },
+      "\u2502"
+    )));
+  };
+  var Header_default = Header;
+
+  // components/App.js
+  var App = () => {
+    return /* @__PURE__ */ import_react9.default.createElement(Reascii_default, null, /* @__PURE__ */ import_react9.default.createElement(GridCount_default, null), /* @__PURE__ */ import_react9.default.createElement(Header_default, null), /* @__PURE__ */ import_react9.default.createElement(Body_default, null));
+  };
   var App_default = App;
 
   // root.js
   var container = document.getElementById("root");
   var root = import_client.default.createRoot(container);
-  root.render(/* @__PURE__ */ import_react8.default.createElement(App_default, null));
+  root.render(/* @__PURE__ */ import_react10.default.createElement(App_default, null));
 })();
 /**
  * @license React
