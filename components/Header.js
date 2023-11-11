@@ -5,7 +5,9 @@ const Header = () => {
   return (
     <>
       <Row>
-        <Col id="1" fillChar="─" cols={12} start="│" end="│"></Col>
+        <Col id="1" fillChar="─" cols={12} start="│" end="│">
+          5432
+        </Col>
       </Row>
       <Row>
         <Col

@@ -23054,18 +23054,19 @@
             return BLANK;
           }
         }).join("");
-        const contentLength = contentString.length;
+        const contentLength = contentString.trim().length;
         const minChars = Math.floor(asciiWidth * (cols / COLUMNS));
         const missingChars = asciiWidth * (cols / COLUMNS) - contentLength - (start ? start.length : 0) - (end ? end.length : 0);
         if (missingChars > 0) {
           let currentFillChar = fillChar.repeat(missingChars / fillChar.length);
-          const emptySpace = parseInt(minChars) - (parseInt(currentFillChar.length) + parseInt(contentString.length)) - (start ? start.length : 0) - (end ? end.length : 0);
+          const emptySpace = parseInt(minChars) - (parseInt(currentFillChar.length) + parseInt(contentString.trim().length)) - (start ? start.length : 0) - (end ? end.length : 0);
           console.log(
             "content: " + contentString,
+            "contentLength: " + contentString.trim().length,
+            "fillChar: " + fillChar,
             "minChars: " + minChars,
             "currentFillChar:" + currentFillChar.length,
-            "contentLength: " + contentString.length,
-            "totalChars: " + (parseInt(currentFillChar.length) + parseInt(contentString.length)),
+            "totalChars: " + (parseInt(currentFillChar.length) + parseInt(contentString.trim().length)),
             "emptySpace: " + emptySpace
           );
           emptySpace > 0 ? currentFillChar += BLANK.repeat(emptySpace) : currentFillChar;
@@ -23441,7 +23442,7 @@
   // components/Header.js
   var import_react8 = __toESM(require_react());
   var Header = () => {
-    return /* @__PURE__ */ import_react8.default.createElement(import_react8.default.Fragment, null, /* @__PURE__ */ import_react8.default.createElement(Row, null, /* @__PURE__ */ import_react8.default.createElement(Col_default, { id: "1", fillChar: "\u2500", cols: 12, start: "\u2502", end: "\u2502" })), /* @__PURE__ */ import_react8.default.createElement(Row, null, /* @__PURE__ */ import_react8.default.createElement(
+    return /* @__PURE__ */ import_react8.default.createElement(import_react8.default.Fragment, null, /* @__PURE__ */ import_react8.default.createElement(Row, null, /* @__PURE__ */ import_react8.default.createElement(Col_default, { id: "1", fillChar: "\u2500", cols: 12, start: "\u2502", end: "\u2502" }, "5432")), /* @__PURE__ */ import_react8.default.createElement(Row, null, /* @__PURE__ */ import_react8.default.createElement(
       Col_default,
       {
         id: "1",

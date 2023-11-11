@@ -47,7 +47,7 @@ const Col = ({
           }
         })
         .join("");
-      const contentLength = contentString.length;
+      const contentLength = contentString.trim().length;
 
       // Desktop
       const minChars = Math.floor(asciiWidth * (cols / COLUMNS));
@@ -65,17 +65,20 @@ const Col = ({
         let currentFillChar = fillChar.repeat(missingChars / fillChar.length);
         const emptySpace =
           parseInt(minChars) -
-          (parseInt(currentFillChar.length) + parseInt(contentString.length)) -
+          (parseInt(currentFillChar.length) +
+            parseInt(contentString.trim().length)) -
           (start ? start.length : 0) -
           (end ? end.length : 0);
 
         console.log(
           "content: " + contentString,
+          "contentLength: " + contentString.trim().length,
+          "fillChar: " + fillChar,
           "minChars: " + minChars,
           "currentFillChar:" + currentFillChar.length,
-          "contentLength: " + contentString.length,
           "totalChars: " +
-            (parseInt(currentFillChar.length) + parseInt(contentString.length)),
+            (parseInt(currentFillChar.length) +
+              parseInt(contentString.trim().length)),
           "emptySpace: " + emptySpace
         );
 
