@@ -23030,7 +23030,8 @@
     align = "left",
     lines = null,
     fillColor = "inherit",
-    cap = null
+    start = null,
+    end = null
   }) => {
     const BLANK = "\xA0";
     const COLUMNS = 12;
@@ -23045,20 +23046,20 @@
       if (asciiWidth) {
         const contentString = (Array.isArray(children) ? children : [children]).map((child) => {
           if (child && typeof child === "string") {
-            return child.trim() || "&nbsp;";
+            return child.trim() || BLANK;
           } else if (child && child.props) {
             const childContent = child.props.children;
-            return typeof childContent === "string" ? childContent.trim() || "&nbsp;" : childContent;
+            return typeof childContent === "string" ? childContent.trim() || BLANK : childContent;
           } else {
-            return "&nbsp;";
+            return BLANK;
           }
         }).join("");
         const contentLength = contentString.length;
         const minChars = Math.floor(asciiWidth * (cols / COLUMNS));
-        const missingChars = asciiWidth * (cols / COLUMNS) - contentLength - (cap ? cap.length : 0);
+        const missingChars = asciiWidth * (cols / COLUMNS) - contentLength - (start ? start.length : 0) - (end ? end.length : 0);
         if (missingChars > 0) {
           let currentFillChar = fillChar.repeat(missingChars / fillChar.length);
-          const emptySpace = parseInt(minChars) - (parseInt(currentFillChar.length) + parseInt(contentString.length)) - 1;
+          const emptySpace = parseInt(minChars) - (parseInt(currentFillChar.length) + parseInt(contentString.length)) - (start ? start.length : 0) - (end ? end.length : 0);
           console.log(
             "content: " + contentString,
             "minChars: " + minChars,
@@ -23082,9 +23083,11 @@
     const renderAdditionalFillLines = () => {
       return linesToRender !== -Infinity && Array.from({ length: lines ? lines - 1 : linesToRender - count }).map(
         (_, index) => {
-          const fillCount = (asciiWidth * (cols / COLUMNS) - (cap ? cap.length : 0)) / fillChar.length;
+          const fillCount = (asciiWidth * (cols / COLUMNS) - (start ? start.length : 0) - (end ? end.length : 0)) / fillChar.length;
           const fill2 = fillChar.repeat(fillCount);
-          const line = cap ? fill2 + cap : fill2;
+          let line = fill2;
+          line = start ? start + line : line;
+          line = end ? line + end : line;
           return /* @__PURE__ */ import_react4.default.createElement(
             "div",
             {
@@ -23107,9 +23110,11 @@
           verticalAlign: "top"
         }
       },
-      fill && align === "right" && /* @__PURE__ */ import_react4.default.createElement("span", { style: { color: fillColor } }, fill, cap),
+      start,
+      fill && align === "right" && /* @__PURE__ */ import_react4.default.createElement("span", { style: { color: fillColor } }, fill),
       /* @__PURE__ */ import_react4.default.createElement("span", { style: { color } }, children),
-      fill && align === "left" && /* @__PURE__ */ import_react4.default.createElement("span", { style: { color: fillColor } }, fill, cap),
+      fill && align === "left" && /* @__PURE__ */ import_react4.default.createElement("span", { style: { color: fillColor } }, fill),
+      end,
       renderAdditionalFillLines()
     );
   };
@@ -23135,7 +23140,7 @@
   // components/Body.js
   var import_react7 = __toESM(require_react());
   var Body = () => {
-    return /* @__PURE__ */ import_react7.default.createElement(import_react7.default.Fragment, null, /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "1", fillChar: "\u2500", cols: 12, cap: "\u2502" }, "\u2502")), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "1", fillChar: " ", cols: 12 })), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(
+    return /* @__PURE__ */ import_react7.default.createElement(import_react7.default.Fragment, null, /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "1", fillChar: " ", cols: 12 })), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(
       Col_default,
       {
         id: "1",
@@ -23436,16 +23441,35 @@
   // components/Header.js
   var import_react8 = __toESM(require_react());
   var Header = () => {
-    return /* @__PURE__ */ import_react8.default.createElement(import_react8.default.Fragment, null, /* @__PURE__ */ import_react8.default.createElement(Row, null, /* @__PURE__ */ import_react8.default.createElement(Col_default, { id: "1", fillChar: "\u2500", cols: 12, cap: "\u2502" }, "\u2502!54321")), /* @__PURE__ */ import_react8.default.createElement(Row, null, /* @__PURE__ */ import_react8.default.createElement(Col_default, { id: "1", fillChar: "\u2571\u2572", cols: 12, fillColor: "#DA8FDE", cap: "\u2502" }, "\u2502")), /* @__PURE__ */ import_react8.default.createElement(Row, null, /* @__PURE__ */ import_react8.default.createElement(Col_default, { id: "1", fillChar: "\u2500", cols: 12, cap: "\u2502" }, "\u2502")), /* @__PURE__ */ import_react8.default.createElement(Row, null, /* @__PURE__ */ import_react8.default.createElement(Col_default, { id: "1", fillChar: "\xA0\xB0 \u2518 \u2514 \xB0\xA0", cols: 12, cap: "\u2502" }, "\u2502")), /* @__PURE__ */ import_react8.default.createElement(Row, null, /* @__PURE__ */ import_react8.default.createElement(
+    return /* @__PURE__ */ import_react8.default.createElement(import_react8.default.Fragment, null, /* @__PURE__ */ import_react8.default.createElement(Row, null, /* @__PURE__ */ import_react8.default.createElement(Col_default, { id: "1", fillChar: "\u2500", cols: 12, start: "\u2502", end: "\u2502" })), /* @__PURE__ */ import_react8.default.createElement(Row, null, /* @__PURE__ */ import_react8.default.createElement(
+      Col_default,
+      {
+        id: "1",
+        fillChar: "\u2571\u2572",
+        cols: 12,
+        fillColor: "#DA8FDE",
+        start: "\u2502",
+        end: "\u2502"
+      }
+    )), /* @__PURE__ */ import_react8.default.createElement(Row, null, /* @__PURE__ */ import_react8.default.createElement(Col_default, { id: "1", fillChar: "\u2500", cols: 12, start: "\u2502", end: "\u2502" })), /* @__PURE__ */ import_react8.default.createElement(Row, null, /* @__PURE__ */ import_react8.default.createElement(
+      Col_default,
+      {
+        id: "1",
+        fillChar: "\xA0\xB0 \u2518 \u2514 \xB0\xA0",
+        cols: 12,
+        start: "\u2502",
+        end: "\u2502"
+      }
+    )), /* @__PURE__ */ import_react8.default.createElement(Row, null, /* @__PURE__ */ import_react8.default.createElement(
       Col_default,
       {
         id: "1",
         fillChar: "\xA0\xA0\u255D\xA0\xA0\xA0\u255A\xA0\xA0",
         cols: 12,
-        cap: "\u2502"
-      },
-      "\u2502"
-    )));
+        start: "\u2502",
+        end: "\u2502"
+      }
+    )), /* @__PURE__ */ import_react8.default.createElement(Row, null, /* @__PURE__ */ import_react8.default.createElement(Col_default, { id: "1", fillChar: "\u2500", cols: 12, start: "\u2502", end: "\u2502" })));
   };
   var Header_default = Header;
 

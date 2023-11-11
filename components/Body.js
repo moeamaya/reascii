@@ -5,11 +5,6 @@ const Body = () => {
   return (
     <>
       <Row>
-        <Col id="1" fillChar="─" cols={12} cap="│">
-          │
-        </Col>
-      </Row>
-      <Row>
         <Col id="1" fillChar=" " cols={12} />
       </Row>
       <Row>

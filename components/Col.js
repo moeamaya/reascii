@@ -11,7 +11,8 @@ const Col = ({
   align = "left",
   lines = null,
   fillColor = "inherit",
-  cap = null,
+  start = null,
+  end = null,
 }) => {
   const BLANK = "\u00A0";
   const COLUMNS = 12;
@@ -35,14 +36,14 @@ const Col = ({
       const contentString = (Array.isArray(children) ? children : [children])
         .map((child) => {
           if (child && typeof child === "string") {
-            return child.trim() || "&nbsp;";
+            return child.trim() || BLANK;
           } else if (child && child.props) {
             const childContent = child.props.children;
             return typeof childContent === "string"
-              ? childContent.trim() || "&nbsp;"
+              ? childContent.trim() || BLANK
               : childContent;
           } else {
-            return "&nbsp;";
+            return BLANK;
           }
         })
         .join("");
@@ -52,19 +53,21 @@ const Col = ({
       const minChars = Math.floor(asciiWidth * (cols / COLUMNS));
 
       const missingChars =
-        asciiWidth * (cols / COLUMNS) - contentLength - (cap ? cap.length : 0);
+        asciiWidth * (cols / COLUMNS) -
+        contentLength -
+        (start ? start.length : 0) -
+        (end ? end.length : 0);
 
       // Mobile
       // const missingChars = asciiWidth - contentLength;
-
-      // console.log(contentString, missingChars, asciiWidth, contentLength)
 
       if (missingChars > 0) {
         let currentFillChar = fillChar.repeat(missingChars / fillChar.length);
         const emptySpace =
           parseInt(minChars) -
           (parseInt(currentFillChar.length) + parseInt(contentString.length)) -
-          1;
+          (start ? start.length : 0) -
+          (end ? end.length : 0);
 
         console.log(
           "content: " + contentString,
@@ -95,33 +98,20 @@ const Col = ({
     updateLineCount(id, lineCount);
   }, [id, children, asciiWidth]);
 
-  // const renderAdditionalLines = () => {
-  //   return (
-  //     linesToRender !== -Infinity &&
-  //     Array.from({ length: lines ? lines - 1 : linesToRender - count }).map(
-  //       (_, index) => (
-  //         <div key={index} style={{ color: fillColor }}>
-  //           {fillChar.repeat(
-  //             (asciiWidth * (cols / COLUMNS)) / fillChar.length -
-  //               (cap ? cap.length : 0)
-  //           )}
-  //           {cap}
-  //         </div>
-  //       )
-  //     )
-  //   );
-  // };
-
   const renderAdditionalFillLines = () => {
     return (
       linesToRender !== -Infinity &&
       Array.from({ length: lines ? lines - 1 : linesToRender - count }).map(
         (_, index) => {
           const fillCount =
-            (asciiWidth * (cols / COLUMNS) - (cap ? cap.length : 0)) /
+            (asciiWidth * (cols / COLUMNS) -
+              (start ? start.length : 0) -
+              (end ? end.length : 0)) /
             fillChar.length;
           const fill = fillChar.repeat(fillCount);
-          const line = cap ? fill + cap : fill;
+          let line = fill;
+          line = start ? start + line : line;
+          line = end ? line + end : line;
           return (
             <div
               data-count={fillCount}
@@ -145,19 +135,15 @@ const Col = ({
         verticalAlign: "top",
       }}
     >
+      {start}
       {fill && align === "right" && (
-        <span style={{ color: fillColor }}>
-          {fill}
-          {cap}
-        </span>
+        <span style={{ color: fillColor }}>{fill}</span>
       )}
       <span style={{ color }}>{children}</span>
       {fill && align === "left" && (
-        <span style={{ color: fillColor }}>
-          {fill}
-          {cap}
-        </span>
+        <span style={{ color: fillColor }}>{fill}</span>
       )}
+      {end}
 
       {/* Render additional fill lines if necessary */}
       {renderAdditionalFillLines()}
