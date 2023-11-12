@@ -22935,6 +22935,9 @@
     document.body.removeChild(span);
     return width;
   };
+  var largestMultipleOf12 = (number) => {
+    return Math.floor(number / 12) * 12;
+  };
   var Canvas = ({ fill, children }) => {
     const parentContainerRef = (0, import_react2.useRef)();
     const { updateCanvas } = useCanvas();
@@ -22945,7 +22948,7 @@
         if (parentElement) {
           const canvasWidth = parentElement.clientWidth;
           const characterWidth = calculateCharacterWidth(fillChar);
-          const asciiWidth = Math.floor(canvasWidth / characterWidth);
+          const asciiWidth = largestMultipleOf12(canvasWidth / characterWidth);
           updateCanvas({
             asciiWidth,
             canvasWidth,
@@ -23001,6 +23004,8 @@
   }
   function Row({ children }) {
     const [columnLineCounts, setColumnLineCounts] = (0, import_react3.useState)({});
+    const { canvas } = useCanvas();
+    const { asciiWidth, characterWidth } = canvas;
     const updateLineCount = (columnId, lineCount) => {
       setColumnLineCounts((prevCounts) => ({
         ...prevCounts,
@@ -23016,7 +23021,22 @@
       const lines = extractLinesFromTextNode(textNode);
       return lines.length;
     };
-    return /* @__PURE__ */ import_react3.default.createElement(RowContext.Provider, { value: { updateLineCount, getMaxLineCount, getLineCount } }, /* @__PURE__ */ import_react3.default.createElement("div", null, children));
+    return /* @__PURE__ */ import_react3.default.createElement(
+      RowContext.Provider,
+      {
+        value: { updateLineCount, getMaxLineCount, getLineCount }
+      },
+      /* @__PURE__ */ import_react3.default.createElement(
+        "div",
+        {
+          style: {
+            width: `${characterWidth * asciiWidth}px`,
+            margin: "0 auto"
+          }
+        },
+        children
+      )
+    );
   }
 
   // components/Col.js

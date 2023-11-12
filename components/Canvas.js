@@ -1,22 +1,26 @@
-import React, { useEffect, useRef } from 'react';
-import { useCanvas } from './useCanvas';
+import React, { useEffect, useRef } from "react";
+import { useCanvas } from "./useCanvas";
 
 // Function to calculate character width based on its display
 const calculateCharacterWidth = (char) => {
-  const span = document.createElement('span');
-  span.style.visibility = 'hidden';
-  span.innerText = char.repeat(25)
+  const span = document.createElement("span");
+  span.style.visibility = "hidden";
+  span.innerText = char.repeat(25);
   document.body.appendChild(span);
   const width = span.offsetWidth / 25;
   document.body.removeChild(span);
   return width;
 };
 
+const largestMultipleOf12 = (number) => {
+  return Math.floor(number / 12) * 12;
+};
+
 const Canvas = ({ fill, children }) => {
   const parentContainerRef = useRef();
   const { updateCanvas } = useCanvas();
 
-  const fillChar = fill || '.';
+  const fillChar = fill || ".";
 
   useEffect(() => {
     if (parentContainerRef.current) {
@@ -24,12 +28,12 @@ const Canvas = ({ fill, children }) => {
       if (parentElement) {
         const canvasWidth = parentElement.clientWidth;
         const characterWidth = calculateCharacterWidth(fillChar);
-        const asciiWidth = Math.floor(canvasWidth / characterWidth);
-  
+        const asciiWidth = largestMultipleOf12(canvasWidth / characterWidth);
+
         updateCanvas({
           asciiWidth,
           canvasWidth,
-          characterWidth
+          characterWidth,
         });
       }
     }
