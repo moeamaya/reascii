@@ -138,7 +138,7 @@ const Col = ({
         verticalAlign: "top",
       }}
     >
-      {start}
+      <span style={{ color }}>{start}</span>
       {fill && align === "right" && (
         <span style={{ color: fillColor }}>{fill}</span>
       )}
@@ -146,7 +146,7 @@ const Col = ({
       {fill && align === "left" && (
         <span style={{ color: fillColor }}>{fill}</span>
       )}
-      {end}
+      <span style={{ color }}>{end}</span>
 
       {/* Render additional fill lines if necessary */}
       {renderAdditionalFillLines()}

@@ -427,10 +427,9 @@ const Body = () => {
           cols={6}
           color="#ECF057"
           fillColor="#ECF057"
-          cap="╝░░"
-        >
-          &nbsp;╚
-        </Col>
+          start="&nbsp;╚"
+          end="╝░░"
+        />
         <Col id="3" fillChar=" " cols={3} />
       </Row>
       <Row>

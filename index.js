@@ -23111,11 +23111,11 @@
           verticalAlign: "top"
         }
       },
-      start,
+      /* @__PURE__ */ import_react4.default.createElement("span", { style: { color } }, start),
       fill && align === "right" && /* @__PURE__ */ import_react4.default.createElement("span", { style: { color: fillColor } }, fill),
       /* @__PURE__ */ import_react4.default.createElement("span", { style: { color } }, children),
       fill && align === "left" && /* @__PURE__ */ import_react4.default.createElement("span", { style: { color: fillColor } }, fill),
-      end,
+      /* @__PURE__ */ import_react4.default.createElement("span", { style: { color } }, end),
       renderAdditionalFillLines()
     );
   };
@@ -23432,9 +23432,9 @@
         cols: 6,
         color: "#ECF057",
         fillColor: "#ECF057",
-        cap: "\u255D\u2591\u2591"
-      },
-      "\xA0\u255A"
+        start: "\xA0\u255A",
+        end: "\u255D\u2591\u2591"
+      }
     ), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "3", fillChar: " ", cols: 3 })), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "1", fillChar: "*", cols: 3, lines: "5" }, "Hi"), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "2", fillChar: "\u2550", cols: 6 }, "\u255A"), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "3", fillChar: "@", cols: 3 }, "Hello")));
   };
   var Body_default = Body;
