@@ -2296,9 +2296,9 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React11 = require_react();
+          var React12 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React11.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React12.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
@@ -3819,7 +3819,7 @@
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React11.Children.forEach(props.children, function(child) {
+                  React12.Children.forEach(props.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -11980,7 +11980,7 @@
             }
           }
           var fakeInternalInstance = {};
-          var emptyRefsObject = new React11.Component().refs;
+          var emptyRefsObject = new React12.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -22897,11 +22897,11 @@
   });
 
   // root.js
-  var import_react10 = __toESM(require_react());
+  var import_react11 = __toESM(require_react());
   var import_client = __toESM(require_client());
 
   // components/App.js
-  var import_react9 = __toESM(require_react());
+  var import_react10 = __toESM(require_react());
 
   // components/Reascii.js
   var import_react6 = __toESM(require_react());
@@ -23149,7 +23149,6 @@
     const { color } = prop;
     return /* @__PURE__ */ import_react5.default.createElement(Row, null, /* @__PURE__ */ import_react5.default.createElement("div", { ref, style: { color: "#555" } }, /* @__PURE__ */ import_react5.default.createElement("div", null, "COLUMNS", "-".repeat(Math.max(asciiWidth - 7, 0))), /* @__PURE__ */ import_react5.default.createElement(Col_default, { id: "1", fillChar: ".", cols: 1, color: "#DA8FDE" }, "\u2B10 1"), /* @__PURE__ */ import_react5.default.createElement(Col_default, { id: "2", fillChar: ".", cols: 1, color: "#DA8FDE" }, "\u2B10 2"), /* @__PURE__ */ import_react5.default.createElement(Col_default, { id: "3", fillChar: ".", cols: 1, color: "#DA8FDE" }, "\u2B10 3"), /* @__PURE__ */ import_react5.default.createElement(Col_default, { id: "4", fillChar: ".", cols: 1, color: "#DA8FDE" }, "\u2B10 4"), /* @__PURE__ */ import_react5.default.createElement(Col_default, { id: "5", fillChar: ".", cols: 1, color: "#DA8FDE" }, "\u2B10 5"), /* @__PURE__ */ import_react5.default.createElement(Col_default, { id: "6", fillChar: ".", cols: 1, color: "#DA8FDE" }, "\u2B10 6"), /* @__PURE__ */ import_react5.default.createElement(Col_default, { id: "7", fillChar: ".", cols: 1, color: "#DA8FDE" }, "\u2B10 7"), /* @__PURE__ */ import_react5.default.createElement(Col_default, { id: "8", fillChar: ".", cols: 1, color: "#DA8FDE" }, "\u2B10 8"), /* @__PURE__ */ import_react5.default.createElement(Col_default, { id: "9", fillChar: ".", cols: 1, color: "#DA8FDE" }, "\u2B10 9"), /* @__PURE__ */ import_react5.default.createElement(Col_default, { id: "10", fillChar: ".", cols: 1, color: "#DA8FDE" }, "\u2B10 10"), /* @__PURE__ */ import_react5.default.createElement(Col_default, { id: "11", fillChar: ".", cols: 1, color: "#DA8FDE" }, "\u2B10 11"), /* @__PURE__ */ import_react5.default.createElement(Col_default, { id: "12", fillChar: ".", cols: 1, color: "#DA8FDE" }, "\u2B10 12"), /* @__PURE__ */ import_react5.default.createElement("div", { style: { color: "#555" } }, ".".repeat(asciiWidth)), /* @__PURE__ */ import_react5.default.createElement("div", { style: { color: "#555" } }, ".".repeat(asciiWidth))));
   });
-  var GridCount_default = GridCount;
 
   // components/Reascii.js
   var Reascii = ({ fill, children }) => {
@@ -23160,309 +23159,29 @@
 
   // components/Body.js
   var import_react7 = __toESM(require_react());
-  var Body = () => {
-    return /* @__PURE__ */ import_react7.default.createElement(import_react7.default.Fragment, null, /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "1", fillChar: " ", cols: 12 })), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(
-      Col_default,
+
+  // components/Test.js
+  var import_react8 = __toESM(require_react());
+  var Test = () => {
+    return /* @__PURE__ */ import_react8.default.createElement(import_react8.default.Fragment, null, /* @__PURE__ */ import_react8.default.createElement(
+      "div",
       {
-        id: "1",
-        fillChar: "\xA0\u2592",
-        cols: 3,
-        color: "var(--color-brand)",
-        fillColor: "var(--color-brand)"
+        style: {
+          position: "sticky",
+          top: 0,
+          color: "var(--color-brand)",
+          background: "#292b30"
+        }
       },
-      "\xA0\u2592"
-    ), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "2", cols: 6 }, "."), /* @__PURE__ */ import_react7.default.createElement(
-      Col_default,
-      {
-        id: "3",
-        fillChar: "\xA0\u2592",
-        cols: 3,
-        color: "var(--color-brand)",
-        fillColor: "var(--color-brand)"
-      },
-      "\xA0\u2592"
-    )), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(
-      Col_default,
-      {
-        id: "1",
-        fillChar: "\u2592\xA0",
-        cols: 3,
-        color: "var(--color-brand)",
-        fillColor: "var(--color-brand)"
-      },
-      "\u2592\xA0"
-    ), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "2", cols: 6, fillChar: "\xA0", cap: "." }, "."), /* @__PURE__ */ import_react7.default.createElement(
-      Col_default,
-      {
-        id: "3",
-        fillChar: "\u2592\xA0",
-        cols: 3,
-        color: "var(--color-brand)",
-        fillColor: "var(--color-brand)"
-      },
-      "\u2592\xA0"
-    )), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "1", fillChar: " \u2592 ", cols: 3, fillColor: "var(--color-brand)" }, "Menu"), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "2", cols: 6, fillChar: "\xA0", cap: "." }, "."), /* @__PURE__ */ import_react7.default.createElement(
-      Col_default,
-      {
-        id: "3",
-        fillChar: "\xA0\u2592",
-        cols: 3,
-        color: "var(--color-brand)",
-        fillColor: "var(--color-brand)"
-      },
-      "\xA0\u2592"
-    )), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "1", fillChar: " \u2592 ", cols: 3, fillColor: "var(--color-brand)" }, "\u21B3 \u3016 ABOUT"), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "2", fillChar: " ", cols: 6 }, ". \xA0\u252C\u2500\u2510\u250C\u2500\u2510\u250C\u2500\u2510\u250C\u2500\u2510\u250C\u2500\u2510\u252C\u252C ", /* @__PURE__ */ import_react7.default.createElement("span", { style: { color: "#ECF057" } }, "JS")), /* @__PURE__ */ import_react7.default.createElement(
-      Col_default,
-      {
-        id: "3",
-        fillChar: "\u2592\xA0",
-        cols: 3,
-        color: "var(--color-brand)",
-        fillColor: "var(--color-brand)"
-      },
-      "\u2592\xA0"
-    )), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "1", fillChar: " \u2592 ", cols: 3, fillColor: "var(--color-brand)" }, "\u21B3 \u25CB GET STARTED"), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "2", cols: 6, fillChar: " " }, ". \xA0\u251C\u252C\u2518\u251C\u2524 \u251C\u2500\u2524\u2514\u2500\u2510\u2502 \xA0\u2502\u2502"), /* @__PURE__ */ import_react7.default.createElement(
-      Col_default,
-      {
-        id: "3",
-        fillChar: "\xA0\u2592",
-        cols: 3,
-        color: "var(--color-brand)",
-        fillColor: "var(--color-brand)"
-      },
-      "\xA0\u2592"
-    )), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "1", fillChar: " \u2592 ", cols: 3, fillColor: "var(--color-brand)" }, "\u21B3 \u2570 DOCS"), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "2", fillChar: " ", cols: 6 }, ". \xA0\u2534\u2514\u2500\u2514\u2500\u2518\u2534 \u2534\u2514\u2500\u2518\u2514\u2500\u2518\u2534\u2534"), /* @__PURE__ */ import_react7.default.createElement(
-      Col_default,
-      {
-        id: "3",
-        fillChar: "\u2592\xA0",
-        cols: 3,
-        color: "var(--color-brand)",
-        fillColor: "var(--color-brand)"
-      },
-      "\u2592\xA0"
-    )), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(
-      Col_default,
-      {
-        id: "3",
-        fillChar: "\u2592\xA0",
-        cols: 3,
-        color: "var(--color-brand)",
-        fillColor: "var(--color-brand)"
-      },
-      "\u2592\xA0"
-    ), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "2", fillChar: " ", cols: 6 }, ". \xA0Reascii.js"), /* @__PURE__ */ import_react7.default.createElement(
-      Col_default,
-      {
-        id: "3",
-        fillChar: "\xA0\u2592",
-        cols: 3,
-        color: "var(--color-brand)",
-        fillColor: "var(--color-brand)"
-      },
-      "\xA0\u2592"
-    )), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(
-      Col_default,
-      {
-        id: "1",
-        fillChar: "\xA0\u2592",
-        cols: 3,
-        color: "var(--color-brand)",
-        fillColor: "var(--color-brand)"
-      },
-      "\xA0\u2592"
-    ), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "2", fillChar: " ", cols: 6, color: "#DA8FDE" }, ". \xA0Responsive ascii layouts in React"), /* @__PURE__ */ import_react7.default.createElement(
-      Col_default,
-      {
-        id: "3",
-        fillChar: "\u2592\xA0",
-        cols: 3,
-        color: "var(--color-brand)",
-        fillColor: "var(--color-brand)"
-      },
-      "\u2592\xA0"
-    )), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(
-      Col_default,
-      {
-        id: "1",
-        fillChar: "\u2592\xA0",
-        cols: 3,
-        color: "var(--color-brand)",
-        fillColor: "var(--color-brand)"
-      },
-      "\u2592\xA0"
-    ), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "2", cols: 6, fillChar: " " }, "."), /* @__PURE__ */ import_react7.default.createElement(
-      Col_default,
-      {
-        id: "3",
-        fillChar: "\xA0\u2592",
-        cols: 3,
-        color: "var(--color-brand)",
-        fillColor: "var(--color-brand)"
-      },
-      "\xA0\u2592"
-    )), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(
-      Col_default,
-      {
-        id: "1",
-        fillChar: "\xA0\u2592",
-        cols: 3,
-        color: "var(--color-brand)",
-        fillColor: "var(--color-brand)"
-      },
-      "\xA0\u2592"
-    ), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "2", cols: 6, color: "var(--color-brand)", fillChar: " " }, "."), /* @__PURE__ */ import_react7.default.createElement(
-      Col_default,
-      {
-        id: "3",
-        fillChar: "\u2592\xA0",
-        cols: 3,
-        color: "var(--color-brand)",
-        fillColor: "var(--color-brand)"
-      },
-      "\u2592\xA0"
-    )), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(
-      Col_default,
-      {
-        id: "1",
-        fillChar: "\u2592\xA0",
-        cols: 3,
-        color: "var(--color-brand)",
-        fillColor: "var(--color-brand)"
-      },
-      "\u2592\xA0"
-    ), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "2", cols: 6, fillChar: "." }, "."), /* @__PURE__ */ import_react7.default.createElement(
-      Col_default,
-      {
-        id: "3",
-        fillChar: "\u2592\xA0",
-        cols: 3,
-        color: "var(--color-brand)",
-        fillColor: "var(--color-brand)"
-      },
-      "\u2592\xA0"
-    )), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(
-      Col_default,
-      {
-        id: "1",
-        fillChar: "\xA0\u2592",
-        cols: 3,
-        color: "var(--color-brand)",
-        fillColor: "var(--color-brand)"
-      },
-      "\xA0\u2592"
-    ), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "2", cols: 6, fillChar: " " }), /* @__PURE__ */ import_react7.default.createElement(
-      Col_default,
-      {
-        id: "3",
-        fillChar: "\xA0\u2592",
-        cols: 3,
-        color: "var(--color-brand)",
-        fillColor: "var(--color-brand)"
-      },
-      "\xA0\u2592"
-    )), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(
-      Col_default,
-      {
-        id: "1",
-        fillChar: "\u2592\xA0",
-        cols: 3,
-        color: "var(--color-brand)",
-        fillColor: "var(--color-brand)",
-        cap: "**"
-      },
-      "\u2592\xA0"
-    ), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "2", cols: 6, fillChar: " " }, "Reascii is a versatile React library designed to make it easy for developers to create and render ASCII art within their web applications. With Reascii, you can effortlessly build intricate and responsive ASCII layouts, making it perfect for displaying unique text-based content in your projects. This library empowers developers to compose complex ASCII structures using familiar JSX syntax, offering flexibility, control, and a rich feature set for creating stunning visual presentations in the browser. Whether you're developing a creative website or simply want to add a touch of ASCII art to your application, Reascii is the ideal tool for bringing this timeless art form to the digital realm with elegance and ease."), /* @__PURE__ */ import_react7.default.createElement(
-      Col_default,
-      {
-        id: "3",
-        fillChar: "\u2592\xA0",
-        cols: 3,
-        color: "var(--color-brand)",
-        fillColor: "var(--color-brand)"
-      },
-      "\u2592\xA0"
-    )), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(
-      Col_default,
-      {
-        id: "1",
-        fillChar: "\xA0\u2592",
-        cols: 3,
-        color: "var(--color-brand)",
-        fillColor: "var(--color-brand)"
-      },
-      "\xA0\u2592"
-    ), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "2", cols: 6, fillChar: " " }), /* @__PURE__ */ import_react7.default.createElement(
-      Col_default,
-      {
-        id: "3",
-        fillChar: "\xA0\u2592",
-        cols: 3,
-        color: "var(--color-brand)",
-        fillColor: "var(--color-brand)"
-      },
-      "\xA0\u2592"
-    )), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(
-      Col_default,
-      {
-        id: "1",
-        fillChar: "\u2592\xA0",
-        cols: 3,
-        color: "var(--color-brand)",
-        fillColor: "var(--color-brand)"
-      },
-      "\u2592\xA0"
-    ), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "2", cols: 6, fillChar: " " }), /* @__PURE__ */ import_react7.default.createElement(
-      Col_default,
-      {
-        id: "3",
-        fillChar: "\u2592\xA0",
-        cols: 3,
-        color: "var(--color-brand)",
-        fillColor: "var(--color-brand)"
-      },
-      "\u2592\xA0"
-    )), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "1", fillChar: " ", cols: 3 }), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "2", fillChar: " ", cols: 6, color: "#ECF057" }, ". QUICK EXAMPLE"), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "3", fillChar: " ", cols: 3 })), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "1", fillChar: " ", cols: 3 }), /* @__PURE__ */ import_react7.default.createElement(
-      Col_default,
-      {
-        id: "2",
-        fillChar: "\u2550",
-        cols: 6,
-        color: "#ECF057",
-        fillColor: "#ECF057",
-        cap: "\u2557\xA0\xA0"
-      },
-      "\xA0\u2554"
-    ), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "3", fillChar: " ", cols: 3 })), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "1", fillChar: " ", cols: 3 }), /* @__PURE__ */ import_react7.default.createElement(
-      Col_default,
-      {
-        id: "2",
-        fillChar: "\xA0",
-        cols: 6,
-        color: "#ECF057",
-        fillColor: "#ECF057",
-        cap: "\u2551\u2591\u2591"
-      },
-      "\xA0\u2551"
-    ), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "3", fillChar: " ", cols: 3 })), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "1", fillChar: " ", cols: 3 }), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "2", fillChar: " ", cols: 6, color: "#ECF057" }, "\xA0\u2551 ", "<Reascii>"), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "3", fillChar: " ", cols: 3 })), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "1", fillChar: " ", cols: 3 }), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "2", fillChar: " ", cols: 6, color: "#ECF057" }, "\xA0\u2551 \xA0\xA0", "<Row>"), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "3", fillChar: " ", cols: 3 })), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "1", fillChar: " ", cols: 3 }), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "2", fillChar: " ", cols: 6, color: "#ECF057" }, "\xA0\u2551 \xA0\xA0\xA0\xA0", '<Col cols="6">Re</Col>'), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "3", fillChar: " ", cols: 3 })), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "1", fillChar: " ", cols: 3 }), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "2", fillChar: " ", cols: 6, color: "#ECF057" }, "\xA0\u2551 \xA0\xA0\xA0\xA0", '<Col cols="6">ascii</Col>'), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "3", fillChar: " ", cols: 3 })), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "1", fillChar: " ", cols: 3 }), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "2", fillChar: " ", cols: 6, color: "#ECF057" }, "\xA0\u2551 \xA0\xA0", "</Row>"), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "3", fillChar: " ", cols: 3 })), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "1", fillChar: " ", cols: 3 }), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "2", fillChar: " ", cols: 6, color: "#ECF057" }, "\xA0\u2551 ", "</Reascii>"), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "3", fillChar: " ", cols: 3 })), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "1", fillChar: " ", cols: 3 }), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "2", fillChar: " ", cols: 6, color: "#ECF057" }, "\xA0\u2551"), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "3", fillChar: " ", cols: 3 })), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "1", fillChar: " ", cols: 3 }), /* @__PURE__ */ import_react7.default.createElement(
-      Col_default,
-      {
-        id: "2",
-        fillChar: "\u2550",
-        cols: 6,
-        color: "#ECF057",
-        fillColor: "#ECF057",
-        start: "\xA0\u255A",
-        end: "\u255D\u2591\u2591"
-      }
-    ), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "3", fillChar: " ", cols: 3 })), /* @__PURE__ */ import_react7.default.createElement(Row, null, /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "1", fillChar: "*", cols: 3, lines: "5" }, "Hi"), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "2", fillChar: "\u2550", cols: 6 }, "\u255A"), /* @__PURE__ */ import_react7.default.createElement(Col_default, { id: "3", fillChar: "@", cols: 3 }, "Hello")));
+      /* @__PURE__ */ import_react8.default.createElement(Row, null, /* @__PURE__ */ import_react8.default.createElement(Col_default, { cols: 3 }, /* @__PURE__ */ import_react8.default.createElement("h3", null, "\xA0\u25CBMENU\u25CB\xA0"), /* @__PURE__ */ import_react8.default.createElement("br", null), /* @__PURE__ */ import_react8.default.createElement("li", null, "\xA0\u21B3 \u3016 ABOUT"), /* @__PURE__ */ import_react8.default.createElement("li", null, "\xA0\u21B3 \u25CB GET STARTED"), /* @__PURE__ */ import_react8.default.createElement("li", null, "\xA0\u21B3 \u2192 API"), /* @__PURE__ */ import_react8.default.createElement("li", null, "\xA0\u21B3 \u2570 DOCS"), /* @__PURE__ */ import_react8.default.createElement("li", null, "\xA0\u21B3 \u255D EXAMPLES")), /* @__PURE__ */ import_react8.default.createElement(Col_default, { cols: 6 }, "Read more"))
+    ), /* @__PURE__ */ import_react8.default.createElement(Row, null, /* @__PURE__ */ import_react8.default.createElement(Col_default, { id: "1", cols: 6, lines: "55" }, "Steady"), /* @__PURE__ */ import_react8.default.createElement(Col_default, { id: "2", cols: 6, fillChar: "$" }, "Fready")));
   };
-  var Body_default = Body;
+  var Test_default = Test;
 
   // components/Header.js
-  var import_react8 = __toESM(require_react());
+  var import_react9 = __toESM(require_react());
   var Header = () => {
-    return /* @__PURE__ */ import_react8.default.createElement(import_react8.default.Fragment, null, /* @__PURE__ */ import_react8.default.createElement(Row, null, /* @__PURE__ */ import_react8.default.createElement(Col_default, { id: "1", fillChar: "\u2500", cols: 12, start: "\u2502", end: "\u2502" }, "5432")), /* @__PURE__ */ import_react8.default.createElement(Row, null, /* @__PURE__ */ import_react8.default.createElement(
+    return /* @__PURE__ */ import_react9.default.createElement(import_react9.default.Fragment, null, /* @__PURE__ */ import_react9.default.createElement(Row, null, /* @__PURE__ */ import_react9.default.createElement(Col_default, { id: "1", fillChar: "\u2500", cols: 12, start: "\u2502", end: "\u2502" }, "5432")), /* @__PURE__ */ import_react9.default.createElement(Row, null, /* @__PURE__ */ import_react9.default.createElement(
       Col_default,
       {
         id: "1",
@@ -23472,7 +23191,7 @@
         start: "\u2502",
         end: "\u2502"
       }
-    )), /* @__PURE__ */ import_react8.default.createElement(Row, null, /* @__PURE__ */ import_react8.default.createElement(Col_default, { id: "1", fillChar: "\u2500", cols: 12, start: "\u2502", end: "\u2502" })), /* @__PURE__ */ import_react8.default.createElement(Row, null, /* @__PURE__ */ import_react8.default.createElement(
+    )), /* @__PURE__ */ import_react9.default.createElement(Row, null, /* @__PURE__ */ import_react9.default.createElement(Col_default, { id: "1", fillChar: "\u2500", cols: 12, start: "\u2502", end: "\u2502" })), /* @__PURE__ */ import_react9.default.createElement(Row, null, /* @__PURE__ */ import_react9.default.createElement(
       Col_default,
       {
         id: "1",
@@ -23481,7 +23200,7 @@
         start: "\u2502",
         end: "\u2502"
       }
-    )), /* @__PURE__ */ import_react8.default.createElement(Row, null, /* @__PURE__ */ import_react8.default.createElement(
+    )), /* @__PURE__ */ import_react9.default.createElement(Row, null, /* @__PURE__ */ import_react9.default.createElement(
       Col_default,
       {
         id: "1",
@@ -23490,20 +23209,20 @@
         start: "\u2502",
         end: "\u2502"
       }
-    )), /* @__PURE__ */ import_react8.default.createElement(Row, null, /* @__PURE__ */ import_react8.default.createElement(Col_default, { id: "1", fillChar: "\u2500", cols: 12, start: "\u2502", end: "\u2502" })));
+    )), /* @__PURE__ */ import_react9.default.createElement(Row, null, /* @__PURE__ */ import_react9.default.createElement(Col_default, { id: "1", fillChar: "\u2500", cols: 12, start: "\u2502", end: "\u2502" })));
   };
   var Header_default = Header;
 
   // components/App.js
   var App = () => {
-    return /* @__PURE__ */ import_react9.default.createElement(Reascii_default, null, /* @__PURE__ */ import_react9.default.createElement(GridCount_default, null), /* @__PURE__ */ import_react9.default.createElement(Header_default, null), /* @__PURE__ */ import_react9.default.createElement(Body_default, null));
+    return /* @__PURE__ */ import_react10.default.createElement(Reascii_default, null, /* @__PURE__ */ import_react10.default.createElement(Header_default, null), /* @__PURE__ */ import_react10.default.createElement(Test_default, null));
   };
   var App_default = App;
 
   // root.js
   var container = document.getElementById("root");
   var root = import_client.default.createRoot(container);
-  root.render(/* @__PURE__ */ import_react10.default.createElement(App_default, null));
+  root.render(/* @__PURE__ */ import_react11.default.createElement(App_default, null));
 })();
 /**
  * @license React
